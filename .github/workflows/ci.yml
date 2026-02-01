@@ -70,11 +70,81 @@ jobs:
           name: report-syntax
           path: src/test/script/report
 
-  # ... (Ajoute tests-context, tests-codegen, tests-differential avec le même bloc credentials) ...
+  tests-context:
+    runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
+      credentials:
+        username: ${{ secrets.ENSIMAG_USER }}
+        password: ${{ secrets.ENSIMAG_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Context tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_context_energy.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-context
+          path: src/test/script/report
+
+  tests-codegen:
+    runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
+      credentials:
+        username: ${{ secrets.ENSIMAG_USER }}
+        password: ${{ secrets.ENSIMAG_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Codegen tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_gencode_energy.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-codegen
+          path: src/test/script/report
+
+  tests-differential:
+    runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
+      credentials:
+        username: ${{ secrets.ENSIMAG_USER }}
+        password: ${{ secrets.ENSIMAG_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Differential tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_differential_energy.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-differential
+          path: src/test/script/report
 
   pages:
     runs-on: ubuntu-latest
-    needs: [tests-lex, tests-synt] # Ajoute tous tes jobs ici
+    needs: [tests-lex, tests-synt, tests-context, tests-codegen, tests-differential]
     if: always()
     steps:
       - uses: actions/checkout@v4
