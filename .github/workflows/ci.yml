@@ -2,15 +2,15 @@ name: CI Deca GL
 
 on:
   push:
+    branches: [ main, master ]
   pull_request:
-
-# L'image globale comme sur GitLab
-container:
-  image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
+    branches: [ main, master ]
 
 jobs:
   tests-basic:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -22,6 +22,8 @@ jobs:
 
   tests-lex:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -41,6 +43,8 @@ jobs:
 
   tests-synt:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -60,6 +64,8 @@ jobs:
 
   tests-context:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -79,6 +85,8 @@ jobs:
 
   tests-codegen:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -98,6 +106,8 @@ jobs:
 
   tests-differential:
     runs-on: ubuntu-latest
+    container:
+      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
       - name: Setup
@@ -125,12 +135,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: all-reports
-      - name: Generate Index
+      - name: Build Index
         run: |
           mkdir -p public
-          # Récupère tous les SVGs des dossiers d'artefacts
           find all-reports -name "*.svg" -exec cp {} public/ \; || true
-          
           echo "<html><body><h1>Résultats des tests</h1>" > public/index.html
           for img in public/*.svg; do
             img_name=$(basename "$img")
