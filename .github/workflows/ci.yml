@@ -1,0 +1,221 @@
+name: CI Deca GL
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  # ======================
+  # Tests Maven de base
+  # ======================
+  tests-basic:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Run basic tests
+        run: mvn -q -e test
+
+
+  # ======================
+  # Tests lexicaux
+  # ======================
+  tests-lex:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Lexical tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_lex_energy.sh
+
+      - name: Upload lex reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-lex
+          path: src/test/script/report
+
+
+  # ======================
+  # Tests syntaxiques
+  # ======================
+  tests-synt:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Syntax tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_syntax_energy.sh
+
+      - name: Upload syntax reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-syntax
+          path: src/test/script/report
+
+
+  # ======================
+  # Tests contextuels
+  # ======================
+  tests-context:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Context tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_context_energy.sh
+
+      - name: Upload context reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-context
+          path: src/test/script/report
+
+
+  # ======================
+  # Tests génération de code
+  # ======================
+  tests-codegen:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Codegen tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_gencode_energy.sh
+
+      - name: Upload codegen reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-codegen
+          path: src/test/script/report
+
+
+  # ======================
+  # Tests différentiels
+  # ======================
+  tests-differential:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup environment
+        run: |
+          apt-get update
+          apt-get install -y openjdk-21-jdk maven git ca-certificates jq
+          cp tools/ima /usr/local/bin/ima
+          chmod +x /usr/local/bin/ima
+
+      - name: Differential tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_differential_energy.sh
+
+      - name: Upload differential reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-differential
+          path: src/test/script/report
+
+
+  # ======================
+  # Pages (équivalent GitLab pages)
+  # ======================
+  pages:
+    runs-on: ubuntu-latest
+    needs:
+      - tests-lex
+      - tests-synt
+      - tests-context
+      - tests-codegen
+      - tests-differential
+    if: always()
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download reports
+        uses: actions/download-artifact@v4
+        with:
+          path: public
+
+      - name: Generate index.html
+        run: |
+          mkdir -p public
+          echo "<html><body><h1>Résultats des tests</h1>" > public/index.html
+          find public -name "*.svg" | while read img; do
+            name=$(basename "$img")
+            echo "<img src=\"$name\" /><br>" >> public/index.html
+          done
+          echo "</body></html>" >> public/index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public
