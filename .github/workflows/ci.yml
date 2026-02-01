@@ -23,6 +23,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Run basic tests
         run: mvn -q -e test
@@ -45,6 +46,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Lexical tests
         run: |
@@ -76,6 +78,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Syntax tests
         run: |
@@ -107,6 +110,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Context tests
         run: |
@@ -138,6 +142,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Codegen tests
         run: |
@@ -169,6 +174,7 @@ jobs:
           apt-get install -y openjdk-21-jdk maven git ca-certificates jq
           cp tools/ima /usr/local/bin/ima
           chmod +x /usr/local/bin/ima
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Differential tests
         run: |
