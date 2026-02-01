@@ -1,0 +1,76 @@
+; test de la taille de la pile
+	TSTO #12	; Taille maximale de la pile
+	ADDSP #12
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.A.setX, R0
+	STORE R0, 5(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	LOAD #1, R2
+	STORE R2, 6(GB)
+	LOAD 6(GB), R2
+	STORE R2, 7(GB)
+	LOAD 7(GB), R2
+	STORE R2, 8(GB)
+	LOAD 8(GB), R2
+	STORE R2, 9(GB)
+	LOAD 9(GB), R2
+	STORE R2, 10(GB)
+	LOAD 10(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+code.A.setX:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 1(R3)
+fin.A.setX:
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

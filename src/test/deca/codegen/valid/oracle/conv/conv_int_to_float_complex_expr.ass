@@ -1,0 +1,72 @@
+; test de la taille de la pile
+	TSTO #6	; Taille maximale de la pile
+	ADDSP #6
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #1, R1
+	STORE R1, 3(GB)
+	LOAD #0x1.0p1, R1
+	STORE R1, 4(GB)
+	LOAD #3, R1
+	STORE R1, 5(GB)
+	LOAD #0x0.0p0, R1
+	STORE R1, 6(GB)
+; Beginning of main instructions:
+	LOAD 3(GB), R1
+	FLOAT R1, R1
+	ADD 4(GB), R1
+	BOV overflow_error
+	LOAD 5(GB), R2
+	FLOAT R2, R2
+	ADD 6(GB), R2
+	BOV overflow_error
+	ADD R2, R1
+	BOV overflow_error
+	LOAD 3(GB), R2
+	FLOAT R2, R2
+	ADD 6(GB), R2
+	BOV overflow_error
+	LOAD 4(GB), R3
+	LOAD 5(GB), R4
+	FLOAT R4, R4
+	ADD R4, R3
+	BOV overflow_error
+	ADD R3, R2
+	BOV overflow_error
+	SUB R2, R1
+	BOV overflow_error
+	WFLOAT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

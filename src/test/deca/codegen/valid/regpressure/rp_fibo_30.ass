@@ -1,0 +1,116 @@
+; test de la taille de la pile
+	TSTO #13	; Taille maximale de la pile
+	ADDSP #13
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #30, R1
+	STORE R1, 3(GB)
+	LOAD #2, R1
+	STORE R1, 4(GB)
+	LOAD #0, R1
+	STORE R1, 5(GB)
+	LOAD #1, R1
+	STORE R1, 6(GB)
+	LOAD #0, R1
+	STORE R1, 7(GB)
+	LOAD #2, R1
+	STORE R1, 8(GB)
+	LOAD #2, R1
+	STORE R1, 9(GB)
+	LOAD #3, R1
+	STORE R1, 10(GB)
+	LOAD #4, R1
+	STORE R1, 11(GB)
+	LOAD #5, R1
+	STORE R1, 12(GB)
+	LOAD #0, R1
+	STORE R1, 13(GB)
+; Beginning of main instructions:
+	BRA E_Cond.0
+E_Debut.0:
+	LOAD 5(GB), R2
+	ADD 6(GB), R2
+	BOV overflow_error
+	STORE R2, 7(GB)
+	LOAD 6(GB), R2
+	STORE R2, 5(GB)
+	LOAD 7(GB), R2
+	STORE R2, 6(GB)
+	LOAD 4(GB), R2
+	ADD 9(GB), R2
+	BOV overflow_error
+	LOAD 4(GB), R3
+	ADD 10(GB), R3
+	BOV overflow_error
+	MUL R3, R2
+	BOV overflow_error
+	LOAD 4(GB), R3
+	ADD 11(GB), R3
+	BOV overflow_error
+	LOAD 4(GB), R4
+	ADD 12(GB), R4
+	BOV overflow_error
+	MUL R4, R3
+	BOV overflow_error
+	SUB R3, R2
+	BOV overflow_error
+	LOAD 4(GB), R3
+	ADD 4(GB), R3
+	BOV overflow_error
+	LOAD 4(GB), R4
+	ADD 4(GB), R4
+	BOV overflow_error
+	QUO R4, R3
+	BOV division_by_zero_error
+	ADD R3, R2
+	BOV overflow_error
+	STORE R2, 13(GB)
+	LOAD 4(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+E_Cond.0:
+	LOAD 4(GB), R2
+	LOAD 3(GB), R3
+	CMP R3, R2
+	BLE E_Debut.0
+	LOAD 6(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+division_by_zero_error:
+	WSTR "Error : Division by zero is forbidden"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

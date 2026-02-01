@@ -1,0 +1,96 @@
+; test de la taille de la pile
+	TSTO #7	; Taille maximale de la pile
+	ADDSP #6
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Init
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Init.getX, R0
+	STORE R0, 5(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 9
+	NEW #2, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Init
+	POP R2
+	STORE R2, 6(GB)
+; Beginning of main instructions:
+	WSTR "x init = "
+	ADDSP #1
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Init
+init.Init:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #10, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+code.Init.getX:
+	TSTO #1
+	PUSH R2
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	BRA fin.Init.getX
+	BRA fin.Init.getX
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.Init.getXsans return"
+	WNL
+	ERROR
+fin.Init.getX:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

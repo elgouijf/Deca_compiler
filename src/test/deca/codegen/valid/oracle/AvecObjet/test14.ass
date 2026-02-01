@@ -1,0 +1,104 @@
+; test de la taille de la pile
+	TSTO #10	; Taille maximale de la pile
+	ADDSP #9
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Forme
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Forme.dessiner, R0
+	STORE R0, 5(GB)
+; Construction de la table des méthodes de Carre
+	LEA 3(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.Carre.dessiner, R0
+	STORE R0, 8(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 9
+	NEW #1, R2
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Carre
+	POP R2
+	STORE R2, 9(GB)
+; Beginning of main instructions:
+	ADDSP #1
+	LOAD 9(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #1
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Forme
+init.Forme:
+	RTS
+code.Forme.dessiner:
+	WSTR "Forme"
+	WNL
+fin.Forme.dessiner:
+	RTS
+; Initialisation des champs de la classe Carre
+init.Carre:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.Forme
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.Carre.dessiner:
+	TSTO #1
+	PUSH R2
+	WSTR "Carre"
+	WNL
+fin.Carre.dessiner:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

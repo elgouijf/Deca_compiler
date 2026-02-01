@@ -1,0 +1,83 @@
+; test de la taille de la pile
+	TSTO #7	; Taille maximale de la pile
+	ADDSP #5
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.A.f, R0
+	STORE R0, 5(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	ADDSP #1
+	NEW #1, R3
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.A
+	POP R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #1
+	LOAD R0, R2
+	WSTR "main"
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	RTS
+code.A.f:
+	WSTR "start"
+	WNL
+	LOAD #1, R0
+	BRA fin.A.f
+	BRA fin.A.f
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.A.fsans return"
+	WNL
+	ERROR
+fin.A.f:
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

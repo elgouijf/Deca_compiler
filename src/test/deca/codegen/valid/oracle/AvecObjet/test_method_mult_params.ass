@@ -1,0 +1,173 @@
+; test de la taille de la pile
+	TSTO #14	; Taille maximale de la pile
+	ADDSP #11
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Calculette
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Calculette.sum, R0
+	STORE R0, 5(GB)
+	LOAD code.Calculette.multiply, R0
+	STORE R0, 6(GB)
+	LOAD code.Calculette.divide, R0
+	STORE R0, 7(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 13
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Calculette
+	POP R2
+	STORE R2, 8(GB)
+	ADDSP #3
+	LOAD 8(GB), R2
+	STORE R2, 0(SP)
+	LOAD #3, R2
+	STORE R2, -1(SP)
+	LOAD #5, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 9(GB)
+	ADDSP #3
+	LOAD 8(GB), R2
+	STORE R2, 0(SP)
+	LOAD #4, R2
+	STORE R2, -1(SP)
+	LOAD #2, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 10(GB)
+	ADDSP #3
+	LOAD 8(GB), R2
+	STORE R2, 0(SP)
+	LOAD #24, R2
+	STORE R2, -1(SP)
+	LOAD #3, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 11(GB)
+; Beginning of main instructions:
+	LOAD 9(GB), R1
+	WINT
+	LOAD 10(GB), R1
+	WINT
+	LOAD 11(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Calculette
+init.Calculette:
+	RTS
+code.Calculette.sum:
+	LOAD -3(LB), R0
+	ADD -4(LB), R0
+	BOV overflow_error
+	BRA fin.Calculette.sum
+	BRA fin.Calculette.sum
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.Calculette.sumsans return"
+	WNL
+	ERROR
+fin.Calculette.sum:
+	RTS
+code.Calculette.multiply:
+	LOAD -3(LB), R0
+	MUL -4(LB), R0
+	BOV overflow_error
+	BRA fin.Calculette.multiply
+	BRA fin.Calculette.multiply
+etiq_fin1:
+	WSTR "Erreur : sortie de la methode fin.Calculette.multiplysans return"
+	WNL
+	ERROR
+fin.Calculette.multiply:
+	RTS
+code.Calculette.divide:
+	TSTO #1
+	PUSH R2
+	LOAD -4(LB), R2
+	CMP #0, R2
+	BNE E_Sinon.2
+	WSTR "Division par 0 !"
+	WNL
+	BRA E_Fin.2
+E_Sinon.2:
+E_Fin.2:
+	LOAD -3(LB), R0
+	QUO -4(LB), R0
+	BOV division_by_zero_error
+	BRA fin.Calculette.divide
+	BRA fin.Calculette.divide
+etiq_fin3:
+	WSTR "Erreur : sortie de la methode fin.Calculette.dividesans return"
+	WNL
+	ERROR
+fin.Calculette.divide:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+division_by_zero_error:
+	WSTR "Error : Division by zero is forbidden"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,413 @@
+; test de la taille de la pile
+	TSTO #34	; Taille maximale de la pile
+	ADDSP #7
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de MultParams
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.MultParams.sumAll, R0
+	STORE R0, 5(GB)
+	LOAD code.MultParams.calculateAll, R0
+	STORE R0, 6(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 14
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.MultParams
+	POP R2
+	STORE R2, 7(GB)
+; Beginning of main instructions:
+	ADDSP #1
+	LOAD 7(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD R0, R1
+	MUL #2, R1
+	BOV overflow_error
+	WINT
+	WNL
+	ADDSP #27
+	LOAD 7(GB), R2
+	STORE R2, 0(SP)
+	LOAD #1, R2
+	STORE R2, -1(SP)
+	LOAD #2, R2
+	STORE R2, -2(SP)
+	LOAD #3, R2
+	STORE R2, -3(SP)
+	LOAD #4, R2
+	STORE R2, -4(SP)
+	LOAD #5, R2
+	STORE R2, -5(SP)
+	LOAD #6, R2
+	STORE R2, -6(SP)
+	LOAD #7, R2
+	STORE R2, -7(SP)
+	LOAD #8, R2
+	STORE R2, -8(SP)
+	LOAD #9, R2
+	STORE R2, -9(SP)
+	LOAD #10, R2
+	STORE R2, -10(SP)
+	LOAD #11, R2
+	STORE R2, -11(SP)
+	LOAD #12, R2
+	STORE R2, -12(SP)
+	LOAD #13, R2
+	STORE R2, -13(SP)
+	LOAD #14, R2
+	STORE R2, -14(SP)
+	LOAD #15, R2
+	STORE R2, -15(SP)
+	LOAD #16, R2
+	STORE R2, -16(SP)
+	LOAD #17, R2
+	STORE R2, -17(SP)
+	LOAD #18, R2
+	STORE R2, -18(SP)
+	LOAD #19, R2
+	STORE R2, -19(SP)
+	LOAD #20, R2
+	STORE R2, -20(SP)
+	LOAD #21, R2
+	STORE R2, -21(SP)
+	LOAD #22, R2
+	STORE R2, -22(SP)
+	LOAD #23, R2
+	STORE R2, -23(SP)
+	LOAD #24, R2
+	STORE R2, -24(SP)
+	LOAD #25, R2
+	STORE R2, -25(SP)
+	LOAD #26, R2
+	STORE R2, -26(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #27
+	LOAD R0, R1
+	ADDSP #27
+	LOAD 7(GB), R3
+	STORE R3, 0(SP)
+	LOAD #26, R3
+	STORE R3, -1(SP)
+	LOAD #25, R3
+	STORE R3, -2(SP)
+	LOAD #24, R3
+	STORE R3, -3(SP)
+	LOAD #24, R3
+	STORE R3, -4(SP)
+	LOAD #22, R3
+	STORE R3, -5(SP)
+	LOAD #21, R3
+	STORE R3, -6(SP)
+	LOAD #20, R3
+	STORE R3, -7(SP)
+	LOAD #19, R3
+	STORE R3, -8(SP)
+	LOAD #18, R3
+	STORE R3, -9(SP)
+	LOAD #17, R3
+	STORE R3, -10(SP)
+	LOAD #16, R3
+	STORE R3, -11(SP)
+	LOAD #15, R3
+	STORE R3, -12(SP)
+	LOAD #14, R3
+	STORE R3, -13(SP)
+	LOAD #13, R3
+	STORE R3, -14(SP)
+	LOAD #12, R3
+	STORE R3, -15(SP)
+	LOAD #11, R3
+	STORE R3, -16(SP)
+	LOAD #10, R3
+	STORE R3, -17(SP)
+	LOAD #9, R3
+	STORE R3, -18(SP)
+	LOAD #8, R3
+	STORE R3, -19(SP)
+	LOAD #7, R3
+	STORE R3, -20(SP)
+	LOAD #6, R3
+	STORE R3, -21(SP)
+	LOAD #5, R3
+	STORE R3, -22(SP)
+	LOAD #4, R3
+	STORE R3, -23(SP)
+	LOAD #3, R3
+	STORE R3, -24(SP)
+	LOAD #2, R3
+	STORE R3, -25(SP)
+	LOAD #1, R3
+	STORE R3, -26(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #27
+	LOAD R0, R2
+	ADD R2, R1
+	BOV overflow_error
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe MultParams
+init.MultParams:
+	RTS
+code.MultParams.sumAll:
+	LOAD -3(LB), R0
+	ADD -4(LB), R0
+	BOV overflow_error
+	ADD -5(LB), R0
+	BOV overflow_error
+	ADD -6(LB), R0
+	BOV overflow_error
+	ADD -7(LB), R0
+	BOV overflow_error
+	ADD -8(LB), R0
+	BOV overflow_error
+	ADD -9(LB), R0
+	BOV overflow_error
+	ADD -10(LB), R0
+	BOV overflow_error
+	ADD -11(LB), R0
+	BOV overflow_error
+	ADD -12(LB), R0
+	BOV overflow_error
+	ADD -13(LB), R0
+	BOV overflow_error
+	ADD -14(LB), R0
+	BOV overflow_error
+	ADD -15(LB), R0
+	BOV overflow_error
+	ADD -16(LB), R0
+	BOV overflow_error
+	ADD -17(LB), R0
+	BOV overflow_error
+	ADD -18(LB), R0
+	BOV overflow_error
+	ADD -19(LB), R0
+	BOV overflow_error
+	ADD -20(LB), R0
+	BOV overflow_error
+	ADD -21(LB), R0
+	BOV overflow_error
+	ADD -22(LB), R0
+	BOV overflow_error
+	ADD -23(LB), R0
+	BOV overflow_error
+	ADD -24(LB), R0
+	BOV overflow_error
+	ADD -25(LB), R0
+	BOV overflow_error
+	ADD -26(LB), R0
+	BOV overflow_error
+	ADD -27(LB), R0
+	BOV overflow_error
+	ADD -28(LB), R0
+	BOV overflow_error
+	BRA fin.MultParams.sumAll
+	BRA fin.MultParams.sumAll
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.MultParams.sumAllsans return"
+	WNL
+	ERROR
+fin.MultParams.sumAll:
+	RTS
+code.MultParams.calculateAll:
+	TSTO #3
+	PUSH R2
+	ADDSP #2
+	ADDSP #27
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD #1, R2
+	STORE R2, -1(SP)
+	LOAD #2, R2
+	STORE R2, -2(SP)
+	LOAD #3, R2
+	STORE R2, -3(SP)
+	LOAD #4, R2
+	STORE R2, -4(SP)
+	LOAD #5, R2
+	STORE R2, -5(SP)
+	LOAD #6, R2
+	STORE R2, -6(SP)
+	LOAD #7, R2
+	STORE R2, -7(SP)
+	LOAD #8, R2
+	STORE R2, -8(SP)
+	LOAD #9, R2
+	STORE R2, -9(SP)
+	LOAD #10, R2
+	STORE R2, -10(SP)
+	LOAD #11, R2
+	STORE R2, -11(SP)
+	LOAD #12, R2
+	STORE R2, -12(SP)
+	LOAD #13, R2
+	STORE R2, -13(SP)
+	LOAD #14, R2
+	STORE R2, -14(SP)
+	LOAD #15, R2
+	STORE R2, -15(SP)
+	LOAD #16, R2
+	STORE R2, -16(SP)
+	LOAD #17, R2
+	STORE R2, -17(SP)
+	LOAD #18, R2
+	STORE R2, -18(SP)
+	LOAD #19, R2
+	STORE R2, -19(SP)
+	LOAD #20, R2
+	STORE R2, -20(SP)
+	LOAD #21, R2
+	STORE R2, -21(SP)
+	LOAD #22, R2
+	STORE R2, -22(SP)
+	LOAD #23, R2
+	STORE R2, -23(SP)
+	LOAD #24, R2
+	STORE R2, -24(SP)
+	LOAD #25, R2
+	STORE R2, -25(SP)
+	LOAD #26, R2
+	STORE R2, -26(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #27
+	LOAD R0, R1
+	STORE R1, 1(LB)
+	ADDSP #27
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD #26, R2
+	STORE R2, -1(SP)
+	LOAD #25, R2
+	STORE R2, -2(SP)
+	LOAD #24, R2
+	STORE R2, -3(SP)
+	LOAD #24, R2
+	STORE R2, -4(SP)
+	LOAD #22, R2
+	STORE R2, -5(SP)
+	LOAD #21, R2
+	STORE R2, -6(SP)
+	LOAD #20, R2
+	STORE R2, -7(SP)
+	LOAD #19, R2
+	STORE R2, -8(SP)
+	LOAD #18, R2
+	STORE R2, -9(SP)
+	LOAD #17, R2
+	STORE R2, -10(SP)
+	LOAD #16, R2
+	STORE R2, -11(SP)
+	LOAD #15, R2
+	STORE R2, -12(SP)
+	LOAD #14, R2
+	STORE R2, -13(SP)
+	LOAD #13, R2
+	STORE R2, -14(SP)
+	LOAD #12, R2
+	STORE R2, -15(SP)
+	LOAD #11, R2
+	STORE R2, -16(SP)
+	LOAD #10, R2
+	STORE R2, -17(SP)
+	LOAD #9, R2
+	STORE R2, -18(SP)
+	LOAD #8, R2
+	STORE R2, -19(SP)
+	LOAD #7, R2
+	STORE R2, -20(SP)
+	LOAD #6, R2
+	STORE R2, -21(SP)
+	LOAD #5, R2
+	STORE R2, -22(SP)
+	LOAD #4, R2
+	STORE R2, -23(SP)
+	LOAD #3, R2
+	STORE R2, -24(SP)
+	LOAD #2, R2
+	STORE R2, -25(SP)
+	LOAD #1, R2
+	STORE R2, -26(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #27
+	LOAD R0, R1
+	STORE R1, 2(LB)
+	LOAD 1(LB), R0
+	ADD 2(LB), R0
+	BOV overflow_error
+	BRA fin.MultParams.calculateAll
+	BRA fin.MultParams.calculateAll
+etiq_fin1:
+	WSTR "Erreur : sortie de la methode fin.MultParams.calculateAllsans return"
+	WNL
+	ERROR
+	SUBSP #2
+fin.MultParams.calculateAll:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

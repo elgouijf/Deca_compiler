@@ -1,0 +1,590 @@
+; test de la taille de la pile
+	TSTO #21	; Taille maximale de la pile
+	ADDSP #19
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.A.setX, R0
+	STORE R0, 5(GB)
+; Construction de la table des méthodes de B
+	LEA 1(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+; Construction de la table des méthodes de C
+	LEA 1(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+; Construction de la table des méthodes de D
+	LEA 1(GB), R0
+	STORE R0, 10(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 11(GB)
+; Construction de la table des méthodes de E
+	LEA 1(GB), R0
+	STORE R0, 12(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 13(GB)
+; Construction de la table des méthodes de EBis
+	LEA 12(GB), R0
+	STORE R0, 14(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 15(GB)
+; Construction de la table des méthodes de FinalBoss
+	LEA 1(GB), R0
+	STORE R0, 16(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 17(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 61
+	NEW #11, R2
+	BOV tas_plein
+	LEA 16(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.FinalBoss
+	POP R2
+	STORE R2, 18(GB)
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 10(R1), R1
+	CMP #null, R1
+	BEQ cast_ok.0
+	LOAD 0(R1), R2
+	LEA 14(GB), R0
+instanceof_loop.0:
+	CMP R0, R2
+	BEQ cast_ok.0
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ instanceof_end_loop.0
+	BRA instanceof_loop.0
+instanceof_end_loop.0:
+	BRA cast_error
+cast_ok.0:
+	STORE R1, 19(GB)
+; Beginning of main instructions:
+	ADDSP #2
+	LOAD 18(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 8(R3), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 4(R3), R3
+	STORE R3, 0(SP)
+	LOAD #45, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	WSTR "fBoss.d.a.x = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 8(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 4(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.d.c.p = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 8(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 6(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WFLOAT
+	WNL
+	WSTR "fBoss.e.a.x = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 9(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 2(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.e.b.y = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 9(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 3(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.e.c.p = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 9(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 4(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WFLOAT
+	WNL
+	WSTR "fBoss.e.d.a.x = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 9(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 5(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 4(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.e.d.b.y = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 9(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 5(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 5(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	LOAD 19(GB), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 9(R2), R2
+	CMP #0, R2
+	BEQ E_Sinon.1
+	WSTR "Je suis un Ebis"
+	WNL
+	BRA E_Fin.1
+E_Sinon.1:
+E_Fin.1:
+	WSTR "ebisObj.a2.x = "
+	LOAD 19(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 6(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "ebisObj.b2.y = "
+	LOAD 19(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 7(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "ebisObj.c2.p = "
+	LOAD 19(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 8(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WFLOAT
+	WNL
+	WSTR "fBoss.a.x = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 5(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.b.y = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 6(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	WSTR "fBoss.c.p = "
+	LOAD 18(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 7(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WFLOAT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+code.A.setX:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+fin.A.setX:
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe B
+init.B:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #6, R1
+	STORE R1, 1(R2)
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe C
+init.C:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #1, R1
+	STORE R1, 2(R2)
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe D
+init.D:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.A
+	POP R1
+	STORE R1, 4(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.B
+	POP R1
+	STORE R1, 5(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #3, R1
+	BOV tas_plein
+	LEA 8(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.C
+	POP R1
+	STORE R1, 6(R2)
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe E
+init.E:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.A
+	POP R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.B
+	POP R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #3, R1
+	BOV tas_plein
+	LEA 8(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.C
+	POP R1
+	STORE R1, 4(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #7, R1
+	BOV tas_plein
+	LEA 10(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.D
+	POP R1
+	STORE R1, 5(R2)
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe EBis
+init.EBis:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #null, R0
+	STORE R0, 6(R1)
+	LOAD #null, R0
+	STORE R0, 7(R1)
+	LOAD #null, R0
+	STORE R0, 8(R1)
+	LOAD #0, R0
+	STORE R0, 9(R1)
+	PUSH R1
+	BSR init.E
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	NEW #2, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.A
+	POP R1
+	STORE R1, 6(R3)
+	LOAD -2(LB), R3
+	NEW #2, R1
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.B
+	POP R1
+	STORE R1, 7(R3)
+	LOAD -2(LB), R3
+	NEW #3, R1
+	BOV tas_plein
+	LEA 8(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.C
+	POP R1
+	STORE R1, 8(R3)
+	LOAD -2(LB), R3
+	LOAD #1, R1
+	STORE R1, 9(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe FinalBoss
+init.FinalBoss:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 4(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.A
+	POP R1
+	STORE R1, 5(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #2, R1
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.B
+	POP R1
+	STORE R1, 6(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #3, R1
+	BOV tas_plein
+	LEA 8(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.C
+	POP R1
+	STORE R1, 7(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #7, R1
+	BOV tas_plein
+	LEA 10(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.D
+	POP R1
+	STORE R1, 8(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #6, R1
+	BOV tas_plein
+	LEA 12(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.E
+	POP R1
+	STORE R1, 9(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #10, R1
+	BOV tas_plein
+	LEA 14(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.EBis
+	POP R1
+	STORE R1, 10(R2)
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+cast_error:
+	WSTR "Error : Impossible Cast"
+	WNL
+	ERROR
+; end main program

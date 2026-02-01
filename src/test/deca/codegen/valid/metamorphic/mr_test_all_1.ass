@@ -1,0 +1,264 @@
+; test de la taille de la pile
+	TSTO #18	; Taille maximale de la pile
+	ADDSP #18
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #30, R1
+	STORE R1, 3(GB)
+	LOAD #0, R1
+	STORE R1, 4(GB)
+	LOAD #0, R1
+	STORE R1, 7(GB)
+	LOAD #0, R1
+	STORE R1, 8(GB)
+	LOAD #0, R1
+	STORE R1, 9(GB)
+	LOAD #0, R1
+	STORE R1, 10(GB)
+	LOAD #0, R1
+	STORE R1, 11(GB)
+	LOAD #0, R1
+	STORE R1, 12(GB)
+	LOAD #0, R1
+	STORE R1, 13(GB)
+	LOAD #0x0.0p0, R1
+	STORE R1, 14(GB)
+	LOAD #0x0.0p0, R1
+	STORE R1, 15(GB)
+	LOAD #0, R1
+	STORE R1, 16(GB)
+	LOAD #0, R1
+	STORE R1, 17(GB)
+	LOAD #0, R1
+	STORE R1, 18(GB)
+; Beginning of main instructions:
+	BRA E_Cond.0
+E_Debut.0:
+	LOAD 4(GB), R2
+	MUL #17, R2
+	BOV overflow_error
+	ADD #23, R2
+	BOV overflow_error
+	REM #56, R2
+	BOV division_by_zero_error
+	STORE R2, 5(GB)
+	LOAD 5(GB), R2
+	SUB #10, R2
+	BOV overflow_error
+	STORE R2, 5(GB)
+	LOAD 4(GB), R2
+	MUL #31, R2
+	BOV overflow_error
+	ADD #7, R2
+	BOV overflow_error
+	REM #101, R2
+	BOV division_by_zero_error
+	STORE R2, 6(GB)
+	LOAD 9(GB), R2
+	ADD 5(GB), R2
+	BOV overflow_error
+	STORE R2, 9(GB)
+	LOAD 10(GB), R2
+	ADD 6(GB), R2
+	BOV overflow_error
+	STORE R2, 10(GB)
+	LOAD 5(GB), R2
+	LOAD 7(GB), R3
+	CMP R3, R2
+	BLE E_Sinon.1
+	LOAD 5(GB), R3
+	STORE R3, 7(GB)
+	BRA E_Fin.1
+E_Sinon.1:
+	LOAD 5(GB), R3
+	LOAD 8(GB), R2
+	CMP R2, R3
+	BGE E_Sinon.2
+	LOAD 5(GB), R2
+	STORE R2, 8(GB)
+	BRA E_Fin.2
+E_Sinon.2:
+E_Fin.2:
+E_Fin.1:
+	LOAD 5(GB), R2
+	CMP #30, R2
+	BLT E_Sinon.3
+	LOAD 11(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 11(GB)
+	BRA E_Fin.3
+E_Sinon.3:
+	LOAD 5(GB), R2
+	CMP #0, R2
+	BGT E_Sinon.4
+	LOAD 12(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 12(GB)
+	BRA E_Fin.4
+E_Sinon.4:
+E_Fin.4:
+E_Fin.3:
+	LOAD 6(GB), R2
+	CMP #75, R2
+	BLT E_Sinon.5
+	LOAD 13(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 13(GB)
+	BRA E_Fin.5
+E_Sinon.5:
+E_Fin.5:
+	LOAD 4(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+E_Cond.0:
+	LOAD 4(GB), R2
+	LOAD 3(GB), R3
+	CMP R3, R2
+	BLT E_Debut.0
+	LOAD 9(GB), R3
+	FLOAT R3, R3
+	LOAD 3(GB), R2
+	FLOAT R2, R2
+	MUL #0x1.0p0, R2
+	BOV overflow_error
+	DIV R2, R3
+	BOV overflow_error
+	STORE R3, 14(GB)
+	LOAD 10(GB), R3
+	FLOAT R3, R3
+	LOAD 3(GB), R2
+	FLOAT R2, R2
+	MUL #0x1.0p0, R2
+	BOV overflow_error
+	DIV R2, R3
+	BOV overflow_error
+	STORE R3, 15(GB)
+	LOAD 11(GB), R2
+	CMP #15, R2
+	BGT Etiq_True.6
+	LOAD 7(GB), R2
+	CMP #40, R2
+	BGE Etiq_True.6
+	LOAD #0, R3
+	BRA Etiq_Fin.6
+Etiq_True.6:
+	LOAD #1, R3
+Etiq_Fin.6:
+	STORE R3, 16(GB)
+	LOAD 12(GB), R2
+	CMP #15, R2
+	BGT Etiq_True.7
+	LOAD 8(GB), R2
+	LOAD #5, R4
+	OPP R4, R4
+	CMP R4, R2
+	BLE Etiq_True.7
+	LOAD #0, R3
+	BRA Etiq_Fin.7
+Etiq_True.7:
+	LOAD #1, R3
+Etiq_Fin.7:
+	STORE R3, 17(GB)
+	LOAD 13(GB), R4
+	CMP #15, R4
+	BGT Etiq_True.8
+	LOAD 15(GB), R4
+	CMP #0x1.2cp6, R4
+	BGE Etiq_True.8
+	LOAD #0, R3
+	BRA Etiq_Fin.8
+Etiq_True.8:
+	LOAD #1, R3
+Etiq_Fin.8:
+	STORE R3, 18(GB)
+	WSTR "Température moyenne : "
+	LOAD 14(GB), R1
+	WFLOAT
+	WNL
+	WSTR "Humidité moyenne : "
+	LOAD 15(GB), R1
+	WFLOAT
+	WNL
+	WSTR "Pic température chaude : "
+	LOAD 7(GB), R1
+	WINT
+	WNL
+	WSTR "Pic température froide : "
+	LOAD 8(GB), R1
+	WINT
+	WNL
+	WSTR "Nombre de jours froids : "
+	LOAD 12(GB), R1
+	WINT
+	WNL
+	WSTR "Nombre de jours chauds : "
+	LOAD 11(GB), R1
+	WINT
+	WNL
+	LOAD 16(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.9
+	WSTR "Mois plutôt chaud"
+	WNL
+	BRA E_Fin.9
+E_Sinon.9:
+	LOAD 17(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.10
+	WSTR "Mois plutôt froid"
+	WNL
+	BRA E_Fin.10
+E_Sinon.10:
+E_Fin.10:
+E_Fin.9:
+	LOAD 18(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.11
+	WSTR "Mois plutôt humide"
+	WNL
+	BRA E_Fin.11
+E_Sinon.11:
+	WSTR "Mois plutôt pas humide"
+	WNL
+E_Fin.11:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+division_by_zero_error:
+	WSTR "Error : Division by zero is forbidden"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,1117 @@
+; test de la taille de la pile
+	TSTO #28	; Taille maximale de la pile
+	ADDSP #26
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de TreeNode
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.TreeNode.setValue, R0
+	STORE R0, 5(GB)
+	LOAD code.TreeNode.getValue, R0
+	STORE R0, 6(GB)
+	LOAD code.TreeNode.setLeft, R0
+	STORE R0, 7(GB)
+	LOAD code.TreeNode.setRight, R0
+	STORE R0, 8(GB)
+	LOAD code.TreeNode.getLeft, R0
+	STORE R0, 9(GB)
+	LOAD code.TreeNode.getRight, R0
+	STORE R0, 10(GB)
+	LOAD code.TreeNode.hasLeft, R0
+	STORE R0, 11(GB)
+	LOAD code.TreeNode.hasRight, R0
+	STORE R0, 12(GB)
+	LOAD code.TreeNode.isLeaf, R0
+	STORE R0, 13(GB)
+; Construction de la table des méthodes de BinaryTree
+	LEA 1(GB), R0
+	STORE R0, 14(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 15(GB)
+	LOAD code.BinaryTree.insert, R0
+	STORE R0, 16(GB)
+	LOAD code.BinaryTree.insertNode, R0
+	STORE R0, 17(GB)
+	LOAD code.BinaryTree.printInOrder, R0
+	STORE R0, 18(GB)
+	LOAD code.BinaryTree.printInOrderNode, R0
+	STORE R0, 19(GB)
+	LOAD code.BinaryTree.sumAll, R0
+	STORE R0, 20(GB)
+	LOAD code.BinaryTree.sumNode, R0
+	STORE R0, 21(GB)
+	LOAD code.BinaryTree.countNodes, R0
+	STORE R0, 22(GB)
+	LOAD code.BinaryTree.countNode, R0
+	STORE R0, 23(GB)
+	LOAD code.BinaryTree.contains, R0
+	STORE R0, 24(GB)
+	LOAD code.BinaryTree.containsNode, R0
+	STORE R0, 25(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 44
+	NEW #2, R2
+	BOV tas_plein
+	LEA 14(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.BinaryTree
+	POP R2
+	STORE R2, 26(GB)
+; Beginning of main instructions:
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #5, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #3, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #7, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #1, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #4, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #6, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #9, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #1
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 26(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #1
+	LOAD 26(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #4, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 10(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.0
+	LOAD #1, R1
+	WINT
+	BRA E_Fin.0
+E_Sinon.0:
+	LOAD #0, R1
+	WINT
+E_Fin.0:
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #7, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 10(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.1
+	LOAD #1, R1
+	WINT
+	BRA E_Fin.1
+E_Sinon.1:
+	LOAD #0, R1
+	WINT
+E_Fin.1:
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #10, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 10(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.2
+	LOAD #1, R1
+	WINT
+	BRA E_Fin.2
+E_Sinon.2:
+	LOAD #0, R1
+	WINT
+E_Fin.2:
+	ADDSP #2
+	LOAD 26(GB), R3
+	STORE R3, 0(SP)
+	LOAD #1, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 10(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.3
+	LOAD #1, R1
+	WINT
+	BRA E_Fin.3
+E_Sinon.3:
+	LOAD #0, R1
+	WINT
+E_Fin.3:
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe TreeNode
+init.TreeNode:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #null, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #null, R1
+	STORE R1, 3(R2)
+	POP R2
+	RTS
+code.TreeNode.setValue:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 1(R3)
+fin.TreeNode.setValue:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.getValue:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	BRA fin.TreeNode.getValue
+	BRA fin.TreeNode.getValue
+etiq_fin4:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.getValuesans return"
+	WNL
+	ERROR
+fin.TreeNode.getValue:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.setLeft:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 2(R3)
+fin.TreeNode.setLeft:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.setRight:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 3(R3)
+fin.TreeNode.setRight:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.getLeft:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 2(R2), R0
+	BRA fin.TreeNode.getLeft
+	BRA fin.TreeNode.getLeft
+etiq_fin5:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.getLeftsans return"
+	WNL
+	ERROR
+fin.TreeNode.getLeft:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.getRight:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 3(R2), R0
+	BRA fin.TreeNode.getRight
+	BRA fin.TreeNode.getRight
+etiq_fin6:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.getRightsans return"
+	WNL
+	ERROR
+fin.TreeNode.getRight:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.hasLeft:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE Etiq_True.7
+	LOAD #0, R0
+	BRA Etiq_Fin.7
+Etiq_True.7:
+	LOAD #1, R0
+Etiq_Fin.7:
+	BRA fin.TreeNode.hasLeft
+	BRA fin.TreeNode.hasLeft
+etiq_fin8:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.hasLeftsans return"
+	WNL
+	ERROR
+fin.TreeNode.hasLeft:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.hasRight:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R3
+	LOAD 3(R3), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE Etiq_True.9
+	LOAD #0, R0
+	BRA Etiq_Fin.9
+Etiq_True.9:
+	LOAD #1, R0
+Etiq_Fin.9:
+	BRA fin.TreeNode.hasRight
+	BRA fin.TreeNode.hasRight
+etiq_fin10:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.hasRightsans return"
+	WNL
+	ERROR
+fin.TreeNode.hasRight:
+	POP R3
+	POP R2
+	RTS
+code.TreeNode.isLeaf:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Fin.12
+	LOAD -2(LB), R2
+	LOAD 3(R2), R3
+	LOAD #null, R2
+	CMP R2, R3
+	BEQ Etiq_True.11
+E_Fin.12:
+	LOAD #0, R0
+	BRA Etiq_Fin.11
+Etiq_True.11:
+	LOAD #1, R0
+Etiq_Fin.11:
+	BRA fin.TreeNode.isLeaf
+	BRA fin.TreeNode.isLeaf
+etiq_fin13:
+	WSTR "Erreur : sortie de la methode fin.TreeNode.isLeafsans return"
+	WNL
+	ERROR
+fin.TreeNode.isLeaf:
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe BinaryTree
+init.BinaryTree:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #null, R1
+	STORE R1, 1(R2)
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.insert:
+	TSTO #4
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	NEW #4, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.TreeNode
+	POP R1
+	STORE R1, 1(LB)
+	ADDSP #2
+	LOAD 1(LB), R3
+	STORE R3, 0(SP)
+	LOAD -3(LB), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Sinon.14
+	LOAD 1(LB), R3
+	LOAD -2(LB), R2
+	STORE R3, 1(R2)
+	BRA E_Fin.14
+E_Sinon.14:
+	ADDSP #3
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -2(LB), R4
+	LOAD 1(R4), R2
+	STORE R2, -1(SP)
+	LOAD 1(LB), R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+E_Fin.14:
+	SUBSP #1
+fin.BinaryTree.insert:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.insertNode:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -4(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	LOAD R0, R2
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 3(R4)
+	SUBSP #1
+	LOAD R0, R3
+	CMP R3, R2
+	BGE E_Sinon.15
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 8(R2)
+	SUBSP #1
+	LOAD R0, R3
+	CMP #0, R3
+	BEQ E_Sinon.16
+	ADDSP #3
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 6(R4)
+	SUBSP #1
+	LOAD R0, R2
+	STORE R2, -1(SP)
+	LOAD -4(LB), R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	BRA E_Fin.16
+E_Sinon.16:
+	ADDSP #2
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD -4(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 4(R2)
+	SUBSP #2
+E_Fin.16:
+	BRA E_Fin.15
+E_Sinon.15:
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 9(R2)
+	SUBSP #1
+	LOAD R0, R3
+	CMP #0, R3
+	BEQ E_Sinon.17
+	ADDSP #3
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 7(R4)
+	SUBSP #1
+	LOAD R0, R2
+	STORE R2, -1(SP)
+	LOAD -4(LB), R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #3
+	BRA E_Fin.17
+E_Sinon.17:
+	ADDSP #2
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD -4(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #2
+E_Fin.17:
+E_Fin.15:
+fin.BinaryTree.insertNode:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.printInOrder:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD -2(LB), R4
+	LOAD 1(R4), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 5(R3)
+	SUBSP #2
+	WNL
+fin.BinaryTree.printInOrder:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.printInOrderNode:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BEQ E_Sinon.18
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 6(R4)
+	SUBSP #1
+	LOAD R0, R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #2
+	ADDSP #1
+	LOAD -3(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WSTR " "
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 7(R4)
+	SUBSP #1
+	LOAD R0, R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 5(R2)
+	SUBSP #2
+	BRA E_Fin.18
+E_Sinon.18:
+E_Fin.18:
+fin.BinaryTree.printInOrderNode:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.sumAll:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	SUBSP #2
+	BRA fin.BinaryTree.sumAll
+	BRA fin.BinaryTree.sumAll
+etiq_fin19:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.sumAllsans return"
+	WNL
+	ERROR
+fin.BinaryTree.sumAll:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.sumNode:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Sinon.20
+	LOAD #0, R0
+	BRA fin.BinaryTree.sumNode
+	BRA E_Fin.20
+E_Sinon.20:
+E_Fin.20:
+	ADDSP #1
+	LOAD -3(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	PUSH R0
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 7(R3)
+	SUBSP #2
+	LOAD R0, R1
+	POP R0
+	ADD R1, R0
+	BOV overflow_error
+	PUSH R0
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 7(R3)
+	SUBSP #2
+	LOAD R0, R1
+	POP R0
+	ADD R1, R0
+	BOV overflow_error
+	BRA fin.BinaryTree.sumNode
+	BRA fin.BinaryTree.sumNode
+etiq_fin21:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.sumNodesans return"
+	WNL
+	ERROR
+fin.BinaryTree.sumNode:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.countNodes:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 9(R2)
+	SUBSP #2
+	BRA fin.BinaryTree.countNodes
+	BRA fin.BinaryTree.countNodes
+etiq_fin22:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.countNodessans return"
+	WNL
+	ERROR
+fin.BinaryTree.countNodes:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.countNode:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Sinon.23
+	LOAD #0, R0
+	BRA fin.BinaryTree.countNode
+	BRA E_Fin.23
+E_Sinon.23:
+E_Fin.23:
+	LOAD #1, R0
+	PUSH R0
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 9(R3)
+	SUBSP #2
+	LOAD R0, R1
+	POP R0
+	ADD R1, R0
+	BOV overflow_error
+	PUSH R0
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 9(R3)
+	SUBSP #2
+	LOAD R0, R1
+	POP R0
+	ADD R1, R0
+	BOV overflow_error
+	BRA fin.BinaryTree.countNode
+	BRA fin.BinaryTree.countNode
+etiq_fin24:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.countNodesans return"
+	WNL
+	ERROR
+fin.BinaryTree.countNode:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.contains:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #3
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	STORE R2, -1(SP)
+	LOAD -3(LB), R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 11(R2)
+	SUBSP #3
+	BRA fin.BinaryTree.contains
+	BRA fin.BinaryTree.contains
+etiq_fin25:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.containssans return"
+	WNL
+	ERROR
+fin.BinaryTree.contains:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.BinaryTree.containsNode:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Sinon.26
+	LOAD #0, R0
+	BRA fin.BinaryTree.containsNode
+	BRA E_Fin.26
+E_Sinon.26:
+E_Fin.26:
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD R0, R3
+	LOAD -4(LB), R2
+	CMP R2, R3
+	BNE E_Sinon.27
+	LOAD #1, R0
+	BRA fin.BinaryTree.containsNode
+	BRA E_Fin.27
+E_Sinon.27:
+E_Fin.27:
+	LOAD -4(LB), R2
+	ADDSP #1
+	LOAD -3(LB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 3(R4)
+	SUBSP #1
+	LOAD R0, R3
+	CMP R3, R2
+	BGE E_Sinon.28
+	ADDSP #3
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD -4(LB), R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 11(R3)
+	SUBSP #3
+	BRA fin.BinaryTree.containsNode
+	BRA E_Fin.28
+E_Sinon.28:
+E_Fin.28:
+	ADDSP #3
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	ADDSP #1
+	LOAD -3(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 7(R2)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, -1(SP)
+	LOAD -4(LB), R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 11(R3)
+	SUBSP #3
+	BRA fin.BinaryTree.containsNode
+	BRA fin.BinaryTree.containsNode
+etiq_fin29:
+	WSTR "Erreur : sortie de la methode fin.BinaryTree.containsNodesans return"
+	WNL
+	ERROR
+fin.BinaryTree.containsNode:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

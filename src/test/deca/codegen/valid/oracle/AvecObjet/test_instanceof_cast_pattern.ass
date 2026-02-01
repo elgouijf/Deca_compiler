@@ -1,0 +1,210 @@
+; test de la taille de la pile
+	TSTO #12	; Taille maximale de la pile
+	ADDSP #11
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Animal
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Construction de la table des méthodes de Chien
+	LEA 3(GB), R0
+	STORE R0, 5(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 6(GB)
+; Construction de la table des méthodes de Chat
+	LEA 3(GB), R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 10
+	NEW #3, R2
+	BOV tas_plein
+	LEA 7(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Chat
+	POP R2
+	STORE R2, 9(GB)
+	LOAD #null, R2
+	STORE R2, 10(GB)
+	LOAD #null, R2
+	STORE R2, 11(GB)
+; Beginning of main instructions:
+	LOAD 9(GB), R2
+	CMP #null, R2
+	BEQ E_Sinon.0
+	LOAD 0(R2), R3
+	LEA 5(GB), R0
+instanceof_loop.1:
+	CMP R0, R3
+	BEQ instanceof_bool_true.1
+	LOAD 0(R3), R3
+	CMP #null, R3
+	BEQ instanceof_end_loop.1
+	BRA instanceof_loop.1
+instanceof_end_loop.1:
+	BRA E_Sinon.0
+instanceof_bool_true.1:
+instanceof_bool_end.1:
+	LOAD 9(GB), R2
+	CMP #null, R2
+	BEQ cast_ok.2
+	LOAD 0(R2), R3
+	LEA 5(GB), R0
+instanceof_loop.2:
+	CMP R0, R3
+	BEQ cast_ok.2
+	LOAD 0(R3), R3
+	CMP #null, R3
+	BEQ instanceof_end_loop.2
+	BRA instanceof_loop.2
+instanceof_end_loop.2:
+	BRA cast_error
+cast_ok.2:
+	STORE R2, 10(GB)
+	LOAD 10(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 2(R1), R1
+	WINT
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+	LOAD 9(GB), R2
+	CMP #null, R2
+	BEQ E_Sinon.3
+	LOAD 0(R2), R3
+	LEA 7(GB), R0
+instanceof_loop.4:
+	CMP R0, R3
+	BEQ instanceof_bool_true.4
+	LOAD 0(R3), R3
+	CMP #null, R3
+	BEQ instanceof_end_loop.4
+	BRA instanceof_loop.4
+instanceof_end_loop.4:
+	BRA E_Sinon.3
+instanceof_bool_true.4:
+instanceof_bool_end.4:
+	LOAD 9(GB), R2
+	CMP #null, R2
+	BEQ cast_ok.5
+	LOAD 0(R2), R3
+	LEA 7(GB), R0
+instanceof_loop.5:
+	CMP R0, R3
+	BEQ cast_ok.5
+	LOAD 0(R3), R3
+	CMP #null, R3
+	BEQ instanceof_end_loop.5
+	BRA instanceof_loop.5
+instanceof_end_loop.5:
+	BRA cast_error
+cast_ok.5:
+	STORE R2, 11(GB)
+	LOAD 11(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 2(R1), R1
+	WINT
+	WNL
+	BRA E_Fin.3
+E_Sinon.3:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.3:
+E_Fin.0:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Animal
+init.Animal:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #5, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+; Initialisation des champs de la classe Chien
+init.Chien:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.Animal
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #4, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Chat
+init.Chat:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.Animal
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #12, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+cast_error:
+	WSTR "Error : Impossible Cast"
+	WNL
+	ERROR
+; end main program

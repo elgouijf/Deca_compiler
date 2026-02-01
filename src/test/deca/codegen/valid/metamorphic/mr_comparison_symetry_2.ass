@@ -1,0 +1,89 @@
+; test de la taille de la pile
+	TSTO #2	; Taille maximale de la pile
+	ADDSP #2
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	LOAD #5, R2
+	CMP #3, R2
+	BLE E_Sinon.0
+	WSTR "ok 1"
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+E_Fin.0:
+	LOAD #5, R2
+	CMP #3, R2
+	BLT E_Sinon.1
+	WSTR "ok 2"
+	WNL
+	BRA E_Fin.1
+E_Sinon.1:
+E_Fin.1:
+	LOAD #5, R2
+	CMP #3, R2
+	BNE E_Sinon.2
+	WSTR "pas ok"
+	WNL
+	BRA E_Fin.2
+E_Sinon.2:
+	WSTR "ok 3"
+	WNL
+E_Fin.2:
+	LOAD #5, R2
+	CMP #3, R2
+	BEQ E_Sinon.3
+	WSTR "ok 4"
+	WNL
+	BRA E_Fin.3
+E_Sinon.3:
+E_Fin.3:
+	LOAD #5, R2
+	CMP #3, R2
+	BGE E_Sinon.4
+	WSTR "pas ok"
+	WNL
+	BRA E_Fin.4
+E_Sinon.4:
+	WSTR "ok 5"
+	WNL
+E_Fin.4:
+	LOAD #5, R2
+	CMP #3, R2
+	BGT E_Sinon.5
+	WSTR "pas ok"
+	WNL
+	BRA E_Fin.5
+E_Sinon.5:
+	WSTR "ok 6"
+	WNL
+E_Fin.5:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

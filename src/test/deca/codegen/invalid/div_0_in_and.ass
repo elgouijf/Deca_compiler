@@ -1,0 +1,56 @@
+; test de la taille de la pile
+	TSTO #3	; Taille maximale de la pile
+	ADDSP #3
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #1, R1
+	STORE R1, 3(GB)
+; Beginning of main instructions:
+	LOAD 3(GB), R2
+	CMP #0, R2
+	BEQ E_Sinon.0
+	LOAD #1, R2
+	QUO #0, R2
+	BOV division_by_zero_error
+	CMP #0, R2
+	BNE E_Sinon.0
+	WSTR "pas ok"
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+	WSTR "pas ok"
+	WNL
+E_Fin.0:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+division_by_zero_error:
+	WSTR "Error : Division by zero is forbidden"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

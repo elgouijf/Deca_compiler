@@ -1,0 +1,561 @@
+; test de la taille de la pile
+	TSTO #34	; Taille maximale de la pile
+	ADDSP #31
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de FormeGeo
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.FormeGeo.init, R0
+	STORE R0, 5(GB)
+	LOAD code.FormeGeo.surface, R0
+	STORE R0, 6(GB)
+	LOAD code.FormeGeo.toString, R0
+	STORE R0, 7(GB)
+; Construction de la table des méthodes de Rectrangle
+	LEA 3(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+	LOAD code.Rectrangle.init, R0
+	STORE R0, 10(GB)
+	LOAD code.Rectrangle.surface, R0
+	STORE R0, 11(GB)
+	LOAD code.Rectrangle.toString, R0
+	STORE R0, 12(GB)
+; Construction de la table des méthodes de Cercle
+	LEA 3(GB), R0
+	STORE R0, 13(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 14(GB)
+	LOAD code.Cercle.init, R0
+	STORE R0, 15(GB)
+	LOAD code.Cercle.surface, R0
+	STORE R0, 16(GB)
+	LOAD code.Cercle.toString, R0
+	STORE R0, 17(GB)
+; Construction de la table des méthodes de Carre
+	LEA 8(GB), R0
+	STORE R0, 18(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 19(GB)
+	LOAD code.Rectrangle.init, R0
+	STORE R0, 20(GB)
+	LOAD code.Rectrangle.surface, R0
+	STORE R0, 21(GB)
+	LOAD code.Rectrangle.toString, R0
+	STORE R0, 22(GB)
+; Construction de la table des méthodes de Triangle
+	LEA 3(GB), R0
+	STORE R0, 23(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 24(GB)
+	LOAD code.Triangle.init, R0
+	STORE R0, 25(GB)
+	LOAD code.Triangle.surface, R0
+	STORE R0, 26(GB)
+	LOAD code.Triangle.toString, R0
+	STORE R0, 27(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 13
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.FormeGeo
+	POP R2
+	STORE R2, 28(GB)
+; new ligne 13
+	NEW #3, R2
+	BOV tas_plein
+	LEA 8(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Rectrangle
+	POP R2
+	STORE R2, 29(GB)
+; new ligne 13
+	NEW #2, R2
+	BOV tas_plein
+	LEA 13(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Cercle
+	POP R2
+	STORE R2, 30(GB)
+; new ligne 13
+	NEW #3, R2
+	BOV tas_plein
+	LEA 23(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Triangle
+	POP R2
+	STORE R2, 31(GB)
+; Beginning of main instructions:
+	ADDSP #3
+	LOAD 29(GB), R3
+	STORE R3, 0(SP)
+	LOAD #2, R3
+	FLOAT R3, R3
+	STORE R3, -1(SP)
+	LOAD #4, R3
+	FLOAT R3, R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #3
+	ADDSP #3
+	LOAD 30(GB), R3
+	STORE R3, 0(SP)
+	LOAD #1, R3
+	FLOAT R3, R3
+	STORE R3, -1(SP)
+	LOAD #0, R3
+	FLOAT R3, R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #3
+	ADDSP #3
+	LOAD 31(GB), R3
+	STORE R3, 0(SP)
+	LOAD #3, R3
+	FLOAT R3, R3
+	STORE R3, -1(SP)
+	LOAD #6, R3
+	FLOAT R3, R3
+	STORE R3, -2(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #3
+	ADDSP #1
+	LOAD 28(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 29(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 30(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 31(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #1
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe FormeGeo
+init.FormeGeo:
+	RTS
+code.FormeGeo.init:
+fin.FormeGeo.init:
+	RTS
+code.FormeGeo.surface:
+	LOAD #0, R0
+	BRA fin.FormeGeo.surface
+	BRA fin.FormeGeo.surface
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.FormeGeo.surfacesans return"
+	WNL
+	ERROR
+fin.FormeGeo.surface:
+	RTS
+code.FormeGeo.toString:
+	WSTR "La surface de la forme géométrique : "
+	LOAD #0, R1
+	WINT
+	WNL
+fin.FormeGeo.toString:
+	RTS
+; Initialisation des champs de la classe Rectrangle
+init.Rectrangle:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 1(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.FormeGeo
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 1(R3)
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+code.Rectrangle.init:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+	LOAD -4(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -4(LB), R2
+	POP R3
+	STORE R2, 2(R3)
+fin.Rectrangle.init:
+	POP R3
+	POP R2
+	RTS
+code.Rectrangle.surface:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	MUL R2, R0
+	BOV overflow_error
+	BRA fin.Rectrangle.surface
+	BRA fin.Rectrangle.surface
+etiq_fin1:
+	WSTR "Erreur : sortie de la methode fin.Rectrangle.surfacesans return"
+	WNL
+	ERROR
+fin.Rectrangle.surface:
+	POP R3
+	POP R2
+	RTS
+code.Rectrangle.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	LOAD -2(LB), R4
+	LOAD 2(R4), R3
+	CMP R3, R2
+	BEQ E_Sinon.2
+	WSTR "La surface du rectangle est : "
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	LOAD R0, R1
+	WFLOAT
+	WNL
+	BRA E_Fin.2
+E_Sinon.2:
+	WSTR "La surface du carre est :"
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	LOAD R0, R1
+	WFLOAT
+	WNL
+E_Fin.2:
+fin.Rectrangle.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Cercle
+init.Cercle:
+	TSTO #6
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 1(R1)
+	PUSH R1
+	BSR init.FormeGeo
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 1(R3)
+	RTS
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Cercle.init:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+fin.Cercle.init:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Cercle.surface:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD #0x1.91eb86p1, R0
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	MUL R2, R0
+	BOV overflow_error
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	MUL R2, R0
+	BOV overflow_error
+	BRA fin.Cercle.surface
+	BRA fin.Cercle.surface
+etiq_fin3:
+	WSTR "Erreur : sortie de la methode fin.Cercle.surfacesans return"
+	WNL
+	ERROR
+fin.Cercle.surface:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Cercle.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	WSTR "La surface du cercle est : "
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WFLOAT
+	WNL
+fin.Cercle.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Carre
+init.Carre:
+	TSTO #6
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.Rectrangle
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Triangle
+init.Triangle:
+	TSTO #6
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 1(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.FormeGeo
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 1(R3)
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Triangle.init:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+	LOAD -4(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -4(LB), R2
+	POP R3
+	STORE R2, 2(R3)
+fin.Triangle.init:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Triangle.surface:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	MUL R2, R0
+	BOV overflow_error
+	MUL #0x1.0p-1, R0
+	BOV overflow_error
+	BRA fin.Triangle.surface
+	BRA fin.Triangle.surface
+etiq_fin4:
+	WSTR "Erreur : sortie de la methode fin.Triangle.surfacesans return"
+	WNL
+	ERROR
+fin.Triangle.surface:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Triangle.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	WSTR "La surface du triangle est :"
+	ADDSP #1
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WFLOAT
+	WNL
+fin.Triangle.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

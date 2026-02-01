@@ -1,0 +1,84 @@
+; test de la taille de la pile
+	TSTO #6	; Taille maximale de la pile
+	ADDSP #6
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #1, R1
+	STORE R1, 3(GB)
+	LOAD #2, R1
+	STORE R1, 4(GB)
+	LOAD #3, R1
+	STORE R1, 5(GB)
+	LOAD #4, R1
+	STORE R1, 6(GB)
+; Beginning of main instructions:
+	LOAD 3(GB), R2
+	ADD 4(GB), R2
+	BOV overflow_error
+	LOAD 5(GB), R3
+	ADD 6(GB), R3
+	BOV overflow_error
+	MUL R3, R2
+	BOV overflow_error
+	LOAD 3(GB), R3
+	ADD #10, R3
+	BOV overflow_error
+	LOAD 4(GB), R4
+	ADD #20, R4
+	BOV overflow_error
+	ADD R4, R3
+	BOV overflow_error
+	LOAD 5(GB), R4
+	ADD #30, R4
+	BOV overflow_error
+	LOAD 6(GB), R5
+	ADD #40, R5
+	BOV overflow_error
+	ADD R5, R4
+	BOV overflow_error
+	SUB R4, R3
+	BOV overflow_error
+	CMP R3, R2
+	BGE E_Sinon.0
+	LOAD #111, R1
+	WINT
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+	LOAD #222, R1
+	WINT
+	WNL
+E_Fin.0:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

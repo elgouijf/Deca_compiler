@@ -1,0 +1,380 @@
+; test de la taille de la pile
+	TSTO #42	; Taille maximale de la pile
+	ADDSP #42
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Point4D
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Point4D.setW, R0
+	STORE R0, 5(GB)
+	LOAD code.Point4D.setX, R0
+	STORE R0, 6(GB)
+	LOAD code.Point4D.setY, R0
+	STORE R0, 7(GB)
+	LOAD code.Point4D.setZ, R0
+	STORE R0, 8(GB)
+	LOAD code.Point4D.getW, R0
+	STORE R0, 9(GB)
+	LOAD code.Point4D.getX, R0
+	STORE R0, 10(GB)
+	LOAD code.Point4D.getY, R0
+	STORE R0, 11(GB)
+	LOAD code.Point4D.getZ, R0
+	STORE R0, 12(GB)
+; Construction de la table des méthodes de Point3D
+	LEA 3(GB), R0
+	STORE R0, 13(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 14(GB)
+	LOAD code.Point4D.setW, R0
+	STORE R0, 15(GB)
+	LOAD code.Point4D.setX, R0
+	STORE R0, 16(GB)
+	LOAD code.Point4D.setY, R0
+	STORE R0, 17(GB)
+	LOAD code.Point4D.setZ, R0
+	STORE R0, 18(GB)
+	LOAD code.Point4D.getW, R0
+	STORE R0, 19(GB)
+	LOAD code.Point4D.getX, R0
+	STORE R0, 20(GB)
+	LOAD code.Point4D.getY, R0
+	STORE R0, 21(GB)
+	LOAD code.Point4D.getZ, R0
+	STORE R0, 22(GB)
+; Construction de la table des méthodes de Point2D
+	LEA 3(GB), R0
+	STORE R0, 23(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 24(GB)
+	LOAD code.Point4D.setW, R0
+	STORE R0, 25(GB)
+	LOAD code.Point4D.setX, R0
+	STORE R0, 26(GB)
+	LOAD code.Point4D.setY, R0
+	STORE R0, 27(GB)
+	LOAD code.Point4D.setZ, R0
+	STORE R0, 28(GB)
+	LOAD code.Point4D.getW, R0
+	STORE R0, 29(GB)
+	LOAD code.Point4D.getX, R0
+	STORE R0, 30(GB)
+	LOAD code.Point4D.getY, R0
+	STORE R0, 31(GB)
+	LOAD code.Point4D.getZ, R0
+	STORE R0, 32(GB)
+; Construction de la table des méthodes de Point1D
+	LEA 3(GB), R0
+	STORE R0, 33(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 34(GB)
+	LOAD code.Point4D.setW, R0
+	STORE R0, 35(GB)
+	LOAD code.Point4D.setX, R0
+	STORE R0, 36(GB)
+	LOAD code.Point4D.setY, R0
+	STORE R0, 37(GB)
+	LOAD code.Point4D.setZ, R0
+	STORE R0, 38(GB)
+	LOAD code.Point4D.getW, R0
+	STORE R0, 39(GB)
+	LOAD code.Point4D.getX, R0
+	STORE R0, 40(GB)
+	LOAD code.Point4D.getY, R0
+	STORE R0, 41(GB)
+	LOAD code.Point4D.getZ, R0
+	STORE R0, 42(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Point4D
+init.Point4D:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 4(R2)
+	POP R2
+	RTS
+code.Point4D.setW:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+fin.Point4D.setW:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.setX:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 2(R3)
+fin.Point4D.setX:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.setY:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 3(R3)
+fin.Point4D.setY:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.setZ:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 4(R3)
+fin.Point4D.setZ:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.getW:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	BRA fin.Point4D.getW
+	BRA fin.Point4D.getW
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.Point4D.getWsans return"
+	WNL
+	ERROR
+fin.Point4D.getW:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.getX:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 2(R2), R0
+	BRA fin.Point4D.getX
+	BRA fin.Point4D.getX
+etiq_fin1:
+	WSTR "Erreur : sortie de la methode fin.Point4D.getXsans return"
+	WNL
+	ERROR
+fin.Point4D.getX:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.getY:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 3(R2), R0
+	BRA fin.Point4D.getY
+	BRA fin.Point4D.getY
+etiq_fin2:
+	WSTR "Erreur : sortie de la methode fin.Point4D.getYsans return"
+	WNL
+	ERROR
+fin.Point4D.getY:
+	POP R3
+	POP R2
+	RTS
+code.Point4D.getZ:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 4(R2), R0
+	BRA fin.Point4D.getZ
+	BRA fin.Point4D.getZ
+etiq_fin3:
+	WSTR "Erreur : sortie de la methode fin.Point4D.getZsans return"
+	WNL
+	ERROR
+fin.Point4D.getZ:
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Point3D
+init.Point3D:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 5(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 6(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 7(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 8(R1)
+	PUSH R1
+	BSR init.Point4D
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 5(R3)
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 6(R3)
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 7(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 8(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Point2D
+init.Point2D:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 5(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 6(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 7(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 8(R1)
+	PUSH R1
+	BSR init.Point4D
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 5(R3)
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 6(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 7(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 8(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Point1D
+init.Point1D:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0x0.0p0, R0
+	STORE R0, 5(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 6(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 7(R1)
+	LOAD #0x0.0p0, R0
+	STORE R0, 8(R1)
+	PUSH R1
+	BSR init.Point4D
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0x0.0p0, R1
+	STORE R1, 5(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 6(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 7(R3)
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	FLOAT R1, R1
+	STORE R1, 8(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

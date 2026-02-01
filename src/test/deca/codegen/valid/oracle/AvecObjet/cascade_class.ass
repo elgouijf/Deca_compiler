@@ -1,0 +1,205 @@
+; test de la taille de la pile
+	ADDSP #0
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.A.method1, R0
+	STORE R0, 5(GB)
+	LOAD code.A.methode2, R0
+	STORE R0, 6(GB)
+	LOAD code.A.method3, R0
+	STORE R0, 7(GB)
+; Construction de la table des méthodes de B
+	LEA 3(GB), R0
+	STORE R0, 8(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 9(GB)
+	LOAD code.B.method1, R0
+	STORE R0, 10(GB)
+	LOAD code.A.methode2, R0
+	STORE R0, 11(GB)
+	LOAD code.B.method3, R0
+	STORE R0, 12(GB)
+	LOAD code.B.method4, R0
+	STORE R0, 13(GB)
+	LOAD code.B.method5, R0
+	STORE R0, 14(GB)
+; Construction de la table des méthodes de C
+	LEA 8(GB), R0
+	STORE R0, 15(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 16(GB)
+	LOAD code.C.method1, R0
+	STORE R0, 17(GB)
+	LOAD code.A.methode2, R0
+	STORE R0, 18(GB)
+	LOAD code.B.method3, R0
+	STORE R0, 19(GB)
+	LOAD code.C.method4, R0
+	STORE R0, 20(GB)
+	LOAD code.B.method5, R0
+	STORE R0, 21(GB)
+	LOAD code.C.method2, R0
+	STORE R0, 22(GB)
+; Construction de la table des méthodes de D
+	LEA 15(GB), R0
+	STORE R0, 23(GB)
+	LOAD code.D.equals, R0
+	STORE R0, 24(GB)
+	LOAD code.C.method1, R0
+	STORE R0, 25(GB)
+	LOAD code.A.methode2, R0
+	STORE R0, 26(GB)
+	LOAD code.B.method3, R0
+	STORE R0, 27(GB)
+	LOAD code.C.method4, R0
+	STORE R0, 28(GB)
+	LOAD code.B.method5, R0
+	STORE R0, 29(GB)
+	LOAD code.C.method2, R0
+	STORE R0, 30(GB)
+; Construction de la table des méthodes de E
+	LEA 1(GB), R0
+	STORE R0, 31(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 32(GB)
+	LOAD code.E.methodE, R0
+	STORE R0, 33(GB)
+; Main program
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	RTS
+code.A.method1:
+fin.A.method1:
+	RTS
+code.A.methode2:
+fin.A.methode2:
+	RTS
+code.A.method3:
+fin.A.method3:
+	RTS
+; Initialisation des champs de la classe B
+init.B:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.B.method3:
+	TSTO #1
+	PUSH R2
+fin.B.method3:
+	POP R2
+	RTS
+code.B.method4:
+	TSTO #1
+	PUSH R2
+fin.B.method4:
+	POP R2
+	RTS
+code.B.method5:
+	TSTO #1
+	PUSH R2
+fin.B.method5:
+	POP R2
+	RTS
+code.B.method1:
+	TSTO #1
+	PUSH R2
+fin.B.method1:
+	POP R2
+	RTS
+; Initialisation des champs de la classe C
+init.C:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.B
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.C.method1:
+	TSTO #1
+	PUSH R2
+fin.C.method1:
+	POP R2
+	RTS
+code.C.method4:
+	TSTO #1
+	PUSH R2
+fin.C.method4:
+	POP R2
+	RTS
+code.C.method2:
+	TSTO #1
+	PUSH R2
+fin.C.method2:
+	POP R2
+	RTS
+; Initialisation des champs de la classe D
+init.D:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.C
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.D.equals:
+	TSTO #1
+	PUSH R2
+fin.D.equals:
+	POP R2
+	RTS
+; Initialisation des champs de la classe E
+init.E:
+	TSTO #1
+	PUSH R2
+	POP R2
+	RTS
+code.E.methodE:
+	TSTO #1
+	PUSH R2
+fin.E.methodE:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+; end main program

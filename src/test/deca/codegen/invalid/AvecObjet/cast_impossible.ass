@@ -1,0 +1,129 @@
+; test de la taille de la pile
+	TSTO #11	; Taille maximale de la pile
+	ADDSP #10
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Construction de la table des méthodes de B
+	LEA 3(GB), R0
+	STORE R0, 5(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 6(GB)
+; Construction de la table des méthodes de C
+	LEA 3(GB), R0
+	STORE R0, 7(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 8(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 7
+	NEW #3, R2
+	BOV tas_plein
+	LEA 7(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+	STORE R2, 9(GB)
+	LOAD 9(GB), R1
+	CMP #null, R1
+	BEQ cast_ok.0
+	LOAD 0(R1), R2
+	LEA 5(GB), R0
+instanceof_loop.0:
+	CMP R0, R2
+	BEQ cast_ok.0
+	LOAD 0(R2), R2
+	CMP #null, R2
+	BEQ instanceof_end_loop.0
+	BRA instanceof_loop.0
+instanceof_end_loop.0:
+	BRA cast_error
+cast_ok.0:
+	STORE R1, 10(GB)
+; Beginning of main instructions:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+; Initialisation des champs de la classe B
+init.B:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe C
+init.C:
+	TSTO #5
+	PUSH R2
+	PUSH R3
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	LOAD #0, R0
+	STORE R0, 2(R1)
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	LOAD -2(LB), R3
+	LOAD #0, R1
+	STORE R1, 2(R3)
+	RTS
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+cast_error:
+	WSTR "Error : Impossible Cast"
+	WNL
+	ERROR
+; end main program

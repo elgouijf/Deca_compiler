@@ -1,0 +1,123 @@
+; test de la taille de la pile
+	TSTO #8	; Taille maximale de la pile
+	ADDSP #7
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Construction de la table des méthodes de B
+	LEA 1(GB), R0
+	STORE R0, 5(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 6(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 15
+	NEW #2, R2
+	BOV tas_plein
+	LEA 5(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 7(GB)
+; Beginning of main instructions:
+	LOAD 7(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	WINT
+	WNL
+	LOAD 7(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 2(R1), R1
+	WINT
+	WNL
+	LOAD 7(GB), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 1(R1), R1
+	CMP #null, R1
+	BEQ dereferencement_null
+	LOAD 3(R1), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #1, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #2, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #3, R1
+	STORE R1, 3(R2)
+	POP R2
+	RTS
+; Initialisation des champs de la classe B
+init.B:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #4, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.A
+	POP R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

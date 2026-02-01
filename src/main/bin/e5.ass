@@ -1,0 +1,49 @@
+; test de la taille de la pile
+	TSTO #3	; Taille maximale de la pile
+	BOV stack_overflow_error
+	ADDSP #3
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	LOAD #1, R2
+	STORE R2, 3(GB)
+	LOAD 3(GB), R2
+	STORE R2, 3(GB)
+	LOAD 3(GB), R2
+	CMP #0, R2
+	BEQ E_Sinon.0
+	WSTR "ok "
+	BRA E_Fin.0
+E_Sinon.0:
+	WSTR "erreur "
+E_Fin.0:
+	HALT
+; end main program
+init.Object:
+	RTS
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

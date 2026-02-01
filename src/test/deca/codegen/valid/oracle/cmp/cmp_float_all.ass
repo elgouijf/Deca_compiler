@@ -1,0 +1,211 @@
+; test de la taille de la pile
+	TSTO #12	; Taille maximale de la pile
+	ADDSP #12
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #0x1.8p0, R1
+	STORE R1, 3(GB)
+	LOAD #0x1.0p1, R1
+	STORE R1, 4(GB)
+	LOAD #0x1.8p0, R1
+	OPP R1, R1
+	OPP R1, R1
+	STORE R1, 5(GB)
+	LOAD 3(GB), R2
+	LOAD 4(GB), R3
+	CMP R3, R2
+	BLT Etiq_True.0
+	LOAD #0, R1
+	BRA Etiq_Fin.0
+Etiq_True.0:
+	LOAD #1, R1
+Etiq_Fin.0:
+	STORE R1, 6(GB)
+	LOAD 3(GB), R3
+	LOAD 4(GB), R2
+	CMP R2, R3
+	BLE Etiq_True.1
+	LOAD #0, R1
+	BRA Etiq_Fin.1
+Etiq_True.1:
+	LOAD #1, R1
+Etiq_Fin.1:
+	STORE R1, 7(GB)
+	LOAD 3(GB), R2
+	LOAD 5(GB), R3
+	CMP R3, R2
+	BEQ Etiq_True.2
+	LOAD #0, R1
+	BRA Etiq_Fin.2
+Etiq_True.2:
+	LOAD #1, R1
+Etiq_Fin.2:
+	STORE R1, 8(GB)
+	LOAD 3(GB), R3
+	LOAD 4(GB), R2
+	CMP R2, R3
+	BNE Etiq_True.3
+	LOAD #0, R1
+	BRA Etiq_Fin.3
+Etiq_True.3:
+	LOAD #1, R1
+Etiq_Fin.3:
+	STORE R1, 9(GB)
+	LOAD 5(GB), R2
+	LOAD 4(GB), R3
+	CMP R3, R2
+	BGE Etiq_True.4
+	LOAD #0, R1
+	BRA Etiq_Fin.4
+Etiq_True.4:
+	LOAD #1, R1
+Etiq_Fin.4:
+	STORE R1, 10(GB)
+	LOAD 5(GB), R3
+	LOAD 5(GB), R2
+	CMP R2, R3
+	BGT Etiq_True.5
+	LOAD #0, R1
+	BRA Etiq_Fin.5
+Etiq_True.5:
+	LOAD #1, R1
+Etiq_Fin.5:
+	STORE R1, 11(GB)
+	LOAD #0x1.0p0, R2
+	ADD #0x1.0p0, R2
+	BOV overflow_error
+	LOAD #0x1.0p-1, R3
+	LOAD #2, R4
+	FLOAT R4, R4
+	MUL R4, R3
+	BOV overflow_error
+	ADD #0x1.0p-2, R3
+	BOV overflow_error
+	ADD #0x1.8p-1, R3
+	BOV overflow_error
+	CMP R3, R2
+	BEQ Etiq_True.6
+	LOAD #0, R1
+	BRA Etiq_Fin.6
+Etiq_True.6:
+	LOAD #1, R1
+Etiq_Fin.6:
+	STORE R1, 12(GB)
+; Beginning of main instructions:
+	LOAD 6(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.7
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.7
+E_Sinon.7:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.7:
+	LOAD 7(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.8
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.8
+E_Sinon.8:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.8:
+	LOAD 8(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.9
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.9
+E_Sinon.9:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.9:
+	LOAD 9(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.10
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.10
+E_Sinon.10:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.10:
+	LOAD 10(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.11
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.11
+E_Sinon.11:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.11:
+	LOAD 11(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.12
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.12
+E_Sinon.12:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.12:
+	LOAD 12(GB), R3
+	CMP #0, R3
+	BEQ E_Sinon.13
+	LOAD #1, R1
+	WINT
+	WNL
+	BRA E_Fin.13
+E_Sinon.13:
+	LOAD #0, R1
+	WINT
+	WNL
+E_Fin.13:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

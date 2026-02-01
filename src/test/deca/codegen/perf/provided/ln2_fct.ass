@@ -1,0 +1,200 @@
+; test de la taille de la pile
+	TSTO #14	; Taille maximale de la pile
+	ADDSP #12
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Polyexp
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Polyexp.pexp, R0
+	STORE R0, 5(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 12
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Polyexp
+	POP R2
+	STORE R2, 6(GB)
+	LOAD #0x0.0p0, R1
+	STORE R1, 7(GB)
+	LOAD #0x1.0p0, R1
+	STORE R1, 8(GB)
+	LOAD #0x1.0p0, R1
+	OPP R1, R1
+	STORE R1, 9(GB)
+	LOAD #0x1.6fc2ecp-1, R1
+	STORE R1, 10(GB)
+; Beginning of main instructions:
+	BRA E_Cond.0
+E_Debut.0:
+	ADDSP #2
+	LOAD 6(GB), R3
+	STORE R3, 0(SP)
+	LOAD 7(GB), R3
+	ADD 8(GB), R3
+	BOV overflow_error
+	DIV #0x1.0p1, R3
+	BOV overflow_error
+	STORE R3, 11(GB)
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	LOAD R0, R2
+	STORE R2, 12(GB)
+	CMP #0x0.0p0, R2
+	BLE E_Sinon.1
+	LOAD 11(GB), R2
+	STORE R2, 8(GB)
+	LOAD 12(GB), R2
+	STORE R2, 10(GB)
+	BRA E_Fin.1
+E_Sinon.1:
+	LOAD 11(GB), R2
+	STORE R2, 7(GB)
+	LOAD 12(GB), R2
+	STORE R2, 9(GB)
+E_Fin.1:
+E_Cond.0:
+	LOAD 8(GB), R2
+	LOAD 7(GB), R3
+	ADD #0x1.0p-23, R3
+	BOV overflow_error
+	CMP R3, R2
+	BGE E_Debut.0
+	LOAD 7(GB), R1
+	WFLOAT
+	WSTR " = "
+	LOAD 7(GB), R1
+	WFLOATX
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Polyexp
+init.Polyexp:
+	RTS
+code.Polyexp.pexp:
+	TSTO #7
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	PUSH R5
+	PUSH R6
+	PUSH R7
+	PUSH R8
+	LOAD -3(LB), R0
+	LOAD -3(LB), R2
+	LOAD -3(LB), R3
+	LOAD -3(LB), R4
+	LOAD -3(LB), R5
+	LOAD -3(LB), R6
+	LOAD -3(LB), R7
+	LOAD #0x1.0p0, R8
+	DIV #0x1.3bp12, R8
+	BOV overflow_error
+	MUL R8, R7
+	BOV overflow_error
+	LOAD #0x1.0p0, R8
+	DIV #0x1.68p9, R8
+	BOV overflow_error
+	ADD R8, R7
+	BOV overflow_error
+	MUL R7, R6
+	BOV overflow_error
+	LOAD #0x1.0p0, R7
+	DIV #0x1.ep6, R7
+	BOV overflow_error
+	ADD R7, R6
+	BOV overflow_error
+	MUL R6, R5
+	BOV overflow_error
+	LOAD #0x1.0p0, R6
+	DIV #0x1.8p4, R6
+	BOV overflow_error
+	ADD R6, R5
+	BOV overflow_error
+	MUL R5, R4
+	BOV overflow_error
+	LOAD #0x1.0p0, R5
+	DIV #0x1.8p2, R5
+	BOV overflow_error
+	ADD R5, R4
+	BOV overflow_error
+	MUL R4, R3
+	BOV overflow_error
+	LOAD #0x1.0p0, R4
+	DIV #0x1.0p1, R4
+	BOV overflow_error
+	ADD R4, R3
+	BOV overflow_error
+	MUL R3, R2
+	BOV overflow_error
+	ADD #0x1.0p0, R2
+	BOV overflow_error
+	MUL R2, R0
+	BOV overflow_error
+	LOAD #1, R2
+	FLOAT R2, R2
+	SUB R2, R0
+	BOV overflow_error
+	BRA fin.Polyexp.pexp
+	BRA fin.Polyexp.pexp
+etiq_fin2:
+	WSTR "Erreur : sortie de la methode fin.Polyexp.pexpsans return"
+	WNL
+	ERROR
+fin.Polyexp.pexp:
+	POP R8
+	POP R7
+	POP R6
+	POP R5
+	POP R4
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

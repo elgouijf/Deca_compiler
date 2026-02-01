@@ -1,0 +1,2375 @@
+; test de la taille de la pile
+	TSTO #206	; Taille maximale de la pile
+	ADDSP #205
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 5(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 6(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 7(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 8(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 9(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 10(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 11(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 12(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 13(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 14(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 15(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 16(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 17(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 18(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 19(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 20(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 21(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 22(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 23(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 24(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 25(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 26(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 27(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 28(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 29(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 30(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 31(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 32(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 33(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 34(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 35(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 36(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 37(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 38(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 39(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 40(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 41(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 42(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 43(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 44(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 45(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 46(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 47(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 48(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 49(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 50(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 51(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 52(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 53(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 54(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 55(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 56(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 57(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 58(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 59(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 60(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 61(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 62(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 63(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 64(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 65(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 66(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 67(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 68(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 69(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 70(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 71(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 72(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 73(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 74(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 75(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 76(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 77(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 78(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 79(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 80(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 81(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 82(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 83(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 84(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 85(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 86(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 87(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 88(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 89(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 90(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 91(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 92(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 93(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 94(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 95(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 96(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 97(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 98(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 99(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 100(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 101(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 102(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 103(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 104(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 105(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 106(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 107(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 108(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 109(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 110(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 111(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 112(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 113(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 114(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 115(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 116(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 117(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 118(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 119(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 120(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 121(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 122(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 123(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 124(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 125(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 126(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 127(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 128(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 129(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 130(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 131(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 132(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 133(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 134(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 135(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 136(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 137(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 138(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 139(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 140(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 141(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 142(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 143(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 144(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 145(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 146(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 147(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 148(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 149(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 150(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 151(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 152(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 153(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 154(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 155(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 156(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 157(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 158(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 159(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 160(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 161(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 162(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 163(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 164(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 165(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 166(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 167(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 168(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 169(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 170(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 171(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 172(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 173(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 174(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 175(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 176(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 177(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 178(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 179(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 180(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 181(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 182(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 183(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 184(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 185(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 186(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 187(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 188(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 189(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 190(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 191(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 192(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 193(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 194(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 195(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 196(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 197(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 198(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 199(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 200(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 201(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 202(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 203(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 204(GB)
+; new ligne 7
+	NEW #131, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 205(GB)
+; Beginning of main instructions:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 4(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 5(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 6(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 7(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 8(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 9(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 10(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 11(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 12(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 13(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 14(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 15(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 16(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 17(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 18(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 19(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 20(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 21(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 22(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 23(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 24(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 25(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 26(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 27(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 28(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 29(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 30(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 31(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 32(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 33(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 34(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 35(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 36(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 37(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 38(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 39(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 40(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 41(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 42(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 43(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 44(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 45(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 46(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 47(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 48(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 49(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 50(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 51(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 52(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 53(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 54(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 55(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 56(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 57(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 58(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 59(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 60(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 61(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 62(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 63(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 64(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 65(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 66(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 67(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 68(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 69(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 70(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 71(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 72(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 73(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 74(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 75(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 76(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 77(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 78(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 79(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 80(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 81(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 82(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 83(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 84(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 85(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 86(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 87(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 88(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 89(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 90(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 91(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 92(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 93(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 94(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 95(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 96(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 97(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 98(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 99(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 100(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 101(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 102(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 103(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 104(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 105(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 106(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 107(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 108(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 109(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 110(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 111(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 112(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 113(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 114(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 115(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 116(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 117(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 118(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 119(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 120(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 121(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 122(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 123(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 124(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 125(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 126(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 127(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 128(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 129(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 130(R2)
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,330 @@
+; test de la taille de la pile
+	TSTO #6	; Taille maximale de la pile
+	ADDSP #6
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Main program
+; Beginning of main declarations:
+; Beginning of main instructions:
+	LOAD #1, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 3(GB)
+	LOAD #2, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+	LOAD #3, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 5(GB)
+	LOAD #4, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 6(GB)
+	LOAD #1, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 3(GB)
+	LOAD #2, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+	LOAD #3, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 5(GB)
+	LOAD #4, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 6(GB)
+	LOAD #1, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 3(GB)
+	LOAD #2, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+	LOAD #3, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 5(GB)
+	LOAD #4, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 6(GB)
+	LOAD #1, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 3(GB)
+	LOAD #2, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 4(GB)
+	LOAD #3, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 5(GB)
+	LOAD #4, R2
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	SUB #0, R2
+	BOV overflow_error
+	STORE R2, 6(GB)
+	LOAD 3(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+; end main program

@@ -1,0 +1,82 @@
+; test de la taille de la pile
+	TSTO #6	; Taille maximale de la pile
+	ADDSP #5
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Obj
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+; Main program
+; Beginning of main declarations:
+	LOAD #null, R1
+	STORE R1, 5(GB)
+; Beginning of main instructions:
+	LOAD 5(GB), R2
+	LOAD #null, R3
+	CMP R3, R2
+	BNE E_Sinon.0
+	WSTR "o est null"
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+E_Fin.0:
+	NEW #2, R3
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R3)
+	PUSH R3
+	BSR init.Obj
+	POP R3
+	STORE R3, 5(GB)
+	LOAD 5(GB), R3
+	LOAD #null, R2
+	CMP R2, R3
+	BEQ E_Sinon.1
+	WSTR "o n'est plus null"
+	WNL
+	BRA E_Fin.1
+E_Sinon.1:
+E_Fin.1:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Obj
+init.Obj:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+; end main program

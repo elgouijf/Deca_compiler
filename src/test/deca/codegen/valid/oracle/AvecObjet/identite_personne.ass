@@ -1,0 +1,1260 @@
+; test de la taille de la pile
+	TSTO #68	; Taille maximale de la pile
+	ADDSP #66
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Personne
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Personne.setAge, R0
+	STORE R0, 5(GB)
+	LOAD code.Personne.setPoids, R0
+	STORE R0, 6(GB)
+	LOAD code.Personne.setTaille, R0
+	STORE R0, 7(GB)
+	LOAD code.Personne.getAge, R0
+	STORE R0, 8(GB)
+	LOAD code.Personne.getPoids, R0
+	STORE R0, 9(GB)
+	LOAD code.Personne.getTaille, R0
+	STORE R0, 10(GB)
+	LOAD code.Personne.computeIMC, R0
+	STORE R0, 11(GB)
+	LOAD code.Personne.isEnSousPoids, R0
+	STORE R0, 12(GB)
+	LOAD code.Personne.isNormal, R0
+	STORE R0, 13(GB)
+	LOAD code.Personne.isEnSurpoids, R0
+	STORE R0, 14(GB)
+	LOAD code.Personne.isObese, R0
+	STORE R0, 15(GB)
+	LOAD code.Personne.isTropObese, R0
+	STORE R0, 16(GB)
+	LOAD code.Personne.isMajeure, R0
+	STORE R0, 17(GB)
+	LOAD code.Personne.isMineure, R0
+	STORE R0, 18(GB)
+	LOAD code.Personne.toString, R0
+	STORE R0, 19(GB)
+; Construction de la table des méthodes de Homme
+	LEA 3(GB), R0
+	STORE R0, 20(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 21(GB)
+	LOAD code.Personne.setAge, R0
+	STORE R0, 22(GB)
+	LOAD code.Personne.setPoids, R0
+	STORE R0, 23(GB)
+	LOAD code.Personne.setTaille, R0
+	STORE R0, 24(GB)
+	LOAD code.Personne.getAge, R0
+	STORE R0, 25(GB)
+	LOAD code.Personne.getPoids, R0
+	STORE R0, 26(GB)
+	LOAD code.Personne.getTaille, R0
+	STORE R0, 27(GB)
+	LOAD code.Personne.computeIMC, R0
+	STORE R0, 28(GB)
+	LOAD code.Personne.isEnSousPoids, R0
+	STORE R0, 29(GB)
+	LOAD code.Personne.isNormal, R0
+	STORE R0, 30(GB)
+	LOAD code.Personne.isEnSurpoids, R0
+	STORE R0, 31(GB)
+	LOAD code.Personne.isObese, R0
+	STORE R0, 32(GB)
+	LOAD code.Personne.isTropObese, R0
+	STORE R0, 33(GB)
+	LOAD code.Personne.isMajeure, R0
+	STORE R0, 34(GB)
+	LOAD code.Personne.isMineure, R0
+	STORE R0, 35(GB)
+	LOAD code.Homme.toString, R0
+	STORE R0, 36(GB)
+; Construction de la table des méthodes de Femme
+	LEA 3(GB), R0
+	STORE R0, 37(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 38(GB)
+	LOAD code.Personne.setAge, R0
+	STORE R0, 39(GB)
+	LOAD code.Personne.setPoids, R0
+	STORE R0, 40(GB)
+	LOAD code.Personne.setTaille, R0
+	STORE R0, 41(GB)
+	LOAD code.Personne.getAge, R0
+	STORE R0, 42(GB)
+	LOAD code.Personne.getPoids, R0
+	STORE R0, 43(GB)
+	LOAD code.Personne.getTaille, R0
+	STORE R0, 44(GB)
+	LOAD code.Personne.computeIMC, R0
+	STORE R0, 45(GB)
+	LOAD code.Personne.isEnSousPoids, R0
+	STORE R0, 46(GB)
+	LOAD code.Personne.isNormal, R0
+	STORE R0, 47(GB)
+	LOAD code.Personne.isEnSurpoids, R0
+	STORE R0, 48(GB)
+	LOAD code.Personne.isObese, R0
+	STORE R0, 49(GB)
+	LOAD code.Personne.isTropObese, R0
+	STORE R0, 50(GB)
+	LOAD code.Personne.isMajeure, R0
+	STORE R0, 51(GB)
+	LOAD code.Personne.isMineure, R0
+	STORE R0, 52(GB)
+	LOAD code.Femme.toString, R0
+	STORE R0, 53(GB)
+; Construction de la table des méthodes de Famille
+	LEA 1(GB), R0
+	STORE R0, 54(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 55(GB)
+	LOAD code.Famille.getNbMembers, R0
+	STORE R0, 56(GB)
+	LOAD code.Famille.getFemme, R0
+	STORE R0, 57(GB)
+	LOAD code.Famille.getHomme, R0
+	STORE R0, 58(GB)
+	LOAD code.Famille.getEnfant1, R0
+	STORE R0, 59(GB)
+	LOAD code.Famille.getEnfant2, R0
+	STORE R0, 60(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 107
+	NEW #4, R2
+	BOV tas_plein
+	LEA 20(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Homme
+	POP R2
+	STORE R2, 61(GB)
+; new ligne 114
+	NEW #4, R2
+	BOV tas_plein
+	LEA 37(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Femme
+	POP R2
+	STORE R2, 62(GB)
+; new ligne 23
+	NEW #4, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Personne
+	POP R2
+	STORE R2, 63(GB)
+; new ligne 120
+	NEW #5, R2
+	BOV tas_plein
+	LEA 54(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Famille
+	POP R2
+	STORE R2, 64(GB)
+	LOAD #0, R1
+	STORE R1, 65(GB)
+; Beginning of main instructions:
+	ADDSP #2
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD #32, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.2cp6, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.7d6666p7, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 62(GB), R3
+	STORE R3, 0(SP)
+	LOAD #30, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 62(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.54p7, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 62(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.bcp5, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 63(GB), R3
+	STORE R3, 0(SP)
+	LOAD #13, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 63(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.ep4, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 63(GB), R3
+	STORE R3, 0(SP)
+	LOAD #0x1.eeccccp6, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	LOAD 62(GB), R2
+	LOAD 64(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD 62(GB), R2
+	POP R3
+	STORE R2, 1(R3)
+	LOAD 61(GB), R2
+	LOAD 64(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD 61(GB), R2
+	POP R3
+	STORE R2, 2(R3)
+	LOAD 63(GB), R2
+	LOAD 64(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD 63(GB), R2
+	POP R3
+	STORE R2, 3(R3)
+	LOAD 63(GB), R2
+	LOAD 64(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD 63(GB), R2
+	POP R3
+	STORE R2, 4(R3)
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 16(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 62(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 16(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 63(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 16(R3)
+	SUBSP #1
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 9(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.0
+	WSTR "L'homme est en sous-poids"
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 11(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.1
+	WSTR "L'homme est en sur-poids"
+	WNL
+	BRA E_Fin.1
+E_Sinon.1:
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 10(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.2
+	WSTR "L'homme a un poids normal"
+	WNL
+	BRA E_Fin.2
+E_Sinon.2:
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 12(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.3
+	WSTR "L'homme est obèse"
+	WNL
+	BRA E_Fin.3
+E_Sinon.3:
+	ADDSP #1
+	LOAD 61(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 13(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.4
+	WSTR "L'homme est en trop obèse"
+	WNL
+	BRA E_Fin.4
+E_Sinon.4:
+E_Fin.4:
+E_Fin.3:
+E_Fin.2:
+E_Fin.1:
+E_Fin.0:
+	ADDSP #1
+	LOAD 62(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 15(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.5
+	WSTR "La femme est mineure"
+	WNL
+	BRA E_Fin.5
+E_Sinon.5:
+	WSTR "La femme est majeure"
+	WNL
+E_Fin.5:
+	ADDSP #1
+	LOAD 63(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	STORE R2, 66(GB)
+	LOAD 66(GB), R2
+	LOAD #0, R3
+	FLOAT R3, R3
+	CMP R3, R2
+	BNE E_Sinon.6
+	WSTR "IMC incorrect"
+	WNL
+	BRA E_Fin.6
+E_Sinon.6:
+	WSTR "IMC correct"
+	WNL
+E_Fin.6:
+	WSTR "Famille de "
+	ADDSP #1
+	LOAD 64(GB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WSTR " membres"
+	WNL
+	BRA E_Cond.7
+E_Debut.7:
+	LOAD 65(GB), R3
+	ADD #1, R3
+	BOV overflow_error
+	STORE R3, 65(GB)
+	WSTR "On recense le membre "
+	LOAD 65(GB), R1
+	WINT
+	WNL
+E_Cond.7:
+	ADDSP #1
+	LOAD 64(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R3
+	LOAD 65(GB), R2
+	CMP R2, R3
+	BNE E_Debut.7
+	ADDSP #1
+	ADDSP #1
+	LOAD 64(GB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 5(R4)
+	SUBSP #1
+	LOAD R0, R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 5(R3)
+	SUBSP #1
+	LOAD R0, R2
+	ADDSP #1
+	ADDSP #1
+	LOAD 64(GB), R5
+	STORE R5, 0(SP)
+	LOAD 0(SP), R5
+	CMP #null, R5
+	BEQ dereferencement_null
+	LOAD 0(R5), R5
+	BSR 6(R5)
+	SUBSP #1
+	LOAD R0, R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 5(R4)
+	SUBSP #1
+	LOAD R0, R3
+	CMP R3, R2
+	BNE E_Sinon.8
+	WSTR "Les enfants sont des jumeaux"
+	WNL
+	BRA E_Fin.8
+E_Sinon.8:
+E_Fin.8:
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Personne
+init.Personne:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0x0.0p0, R1
+	STORE R1, 3(R2)
+	POP R2
+	RTS
+code.Personne.setAge:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	CMP #0, R2
+	BGE E_Sinon.9
+	WSTR "L'âge ne peut être négatif !"
+	WNL
+	BRA E_Fin.9
+E_Sinon.9:
+E_Fin.9:
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 1(R3)
+fin.Personne.setAge:
+	POP R3
+	POP R2
+	RTS
+code.Personne.setPoids:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	CMP #0x0.0p0, R2
+	BGE E_Sinon.10
+	WSTR "Le poids ne peut être négatif"
+	WNL
+	BRA E_Fin.10
+E_Sinon.10:
+E_Fin.10:
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD -3(LB), R2
+	POP R3
+	STORE R2, 2(R3)
+fin.Personne.setPoids:
+	POP R3
+	POP R2
+	RTS
+code.Personne.setTaille:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD #0, R3
+	FLOAT R3, R3
+	CMP R3, R2
+	BGT E_Sinon.11
+	WSTR "La taille ne peut être négative"
+	WNL
+	BRA E_Fin.11
+E_Sinon.11:
+E_Fin.11:
+	LOAD -3(LB), R3
+	LOAD -2(LB), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	PUSH R2
+	LOAD -3(LB), R3
+	POP R2
+	STORE R3, 3(R2)
+fin.Personne.setTaille:
+	POP R3
+	POP R2
+	RTS
+code.Personne.getAge:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	BRA fin.Personne.getAge
+	BRA fin.Personne.getAge
+etiq_fin12:
+	WSTR "Erreur : sortie de la methode fin.Personne.getAgesans return"
+	WNL
+	ERROR
+fin.Personne.getAge:
+	POP R3
+	POP R2
+	RTS
+code.Personne.getPoids:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R2
+	LOAD 2(R2), R0
+	BRA fin.Personne.getPoids
+	BRA fin.Personne.getPoids
+etiq_fin13:
+	WSTR "Erreur : sortie de la methode fin.Personne.getPoidssans return"
+	WNL
+	ERROR
+fin.Personne.getPoids:
+	POP R3
+	POP R2
+	RTS
+code.Personne.getTaille:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R0
+	CMP #null, R0
+	BEQ dereferencement_null
+	LOAD 3(R0), R0
+	BRA fin.Personne.getTaille
+	BRA fin.Personne.getTaille
+etiq_fin14:
+	WSTR "Erreur : sortie de la methode fin.Personne.getTaillesans return"
+	WNL
+	ERROR
+fin.Personne.getTaille:
+	POP R3
+	POP R2
+	RTS
+code.Personne.computeIMC:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R2
+	LOAD 2(R2), R0
+	MUL #0x1.388p13, R0
+	BOV overflow_error
+	LOAD -2(LB), R3
+	LOAD 3(R3), R2
+	LOAD -2(LB), R4
+	LOAD 3(R4), R3
+	MUL R3, R2
+	BOV overflow_error
+	DIV R2, R0
+	BOV overflow_error
+	BRA fin.Personne.computeIMC
+	BRA fin.Personne.computeIMC
+etiq_fin15:
+	WSTR "Erreur : sortie de la methode fin.Personne.computeIMCsans return"
+	WNL
+	ERROR
+fin.Personne.computeIMC:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isEnSousPoids:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.28p4, R2
+	BLT Etiq_True.16
+	LOAD #0, R0
+	BRA Etiq_Fin.16
+Etiq_True.16:
+	LOAD #1, R0
+Etiq_Fin.16:
+	BRA fin.Personne.isEnSousPoids
+	BRA fin.Personne.isEnSousPoids
+etiq_fin17:
+	WSTR "Erreur : sortie de la methode fin.Personne.isEnSousPoidssans return"
+	WNL
+	ERROR
+fin.Personne.isEnSousPoids:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isNormal:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.28p4, R2
+	BLT E_Fin.19
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.8e6666p4, R2
+	BLE Etiq_True.18
+E_Fin.19:
+	LOAD #0, R0
+	BRA Etiq_Fin.18
+Etiq_True.18:
+	LOAD #1, R0
+Etiq_Fin.18:
+	BRA fin.Personne.isNormal
+	BRA fin.Personne.isNormal
+etiq_fin20:
+	WSTR "Erreur : sortie de la methode fin.Personne.isNormalsans return"
+	WNL
+	ERROR
+fin.Personne.isNormal:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isEnSurpoids:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.8e6666p4, R2
+	BLE E_Fin.22
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.de6666p4, R2
+	BLE Etiq_True.21
+E_Fin.22:
+	LOAD #0, R0
+	BRA Etiq_Fin.21
+Etiq_True.21:
+	LOAD #1, R0
+Etiq_Fin.21:
+	BRA fin.Personne.isEnSurpoids
+	BRA fin.Personne.isEnSurpoids
+etiq_fin23:
+	WSTR "Erreur : sortie de la methode fin.Personne.isEnSurpoidssans return"
+	WNL
+	ERROR
+fin.Personne.isEnSurpoids:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isObese:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.de6666p4, R2
+	BLE E_Fin.25
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.173334p5, R2
+	BLE Etiq_True.24
+E_Fin.25:
+	LOAD #0, R0
+	BRA Etiq_Fin.24
+Etiq_True.24:
+	LOAD #1, R0
+Etiq_Fin.24:
+	BRA fin.Personne.isObese
+	BRA fin.Personne.isObese
+etiq_fin26:
+	WSTR "Erreur : sortie de la methode fin.Personne.isObesesans return"
+	WNL
+	ERROR
+fin.Personne.isObese:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isTropObese:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.173334p5, R2
+	BLE E_Sinon.27
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 8(R3)
+	SUBSP #1
+	LOAD R0, R2
+	CMP #0x1.3f3334p5, R2
+	BGT E_Sinon.27
+	LOAD #1, R0
+	BRA fin.Personne.isTropObese
+	BRA E_Fin.27
+E_Sinon.27:
+E_Fin.27:
+	LOAD #0, R0
+	BRA fin.Personne.isTropObese
+	BRA fin.Personne.isTropObese
+etiq_fin28:
+	WSTR "Erreur : sortie de la methode fin.Personne.isTropObesesans return"
+	WNL
+	ERROR
+fin.Personne.isTropObese:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isMajeure:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R3
+	LOAD 1(R3), R2
+	CMP #18, R2
+	BGE Etiq_True.29
+	LOAD #0, R0
+	BRA Etiq_Fin.29
+Etiq_True.29:
+	LOAD #1, R0
+Etiq_Fin.29:
+	BRA fin.Personne.isMajeure
+	BRA fin.Personne.isMajeure
+etiq_fin30:
+	WSTR "Erreur : sortie de la methode fin.Personne.isMajeuresans return"
+	WNL
+	ERROR
+fin.Personne.isMajeure:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.isMineure:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD #18, R2
+	LOAD -2(LB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 1(R3), R3
+	CMP R3, R2
+	BGT Etiq_True.31
+	LOAD #0, R0
+	BRA Etiq_Fin.31
+Etiq_True.31:
+	LOAD #1, R0
+Etiq_Fin.31:
+	BRA fin.Personne.isMineure
+	BRA fin.Personne.isMineure
+etiq_fin32:
+	WSTR "Erreur : sortie de la methode fin.Personne.isMineuresans return"
+	WNL
+	ERROR
+fin.Personne.isMineure:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Personne.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	WSTR "La personne est âgée de "
+	LOAD -2(LB), R2
+	LOAD 1(R2), R1
+	WINT
+	WSTR " ans. Elle fait "
+	LOAD -2(LB), R2
+	LOAD 3(R2), R1
+	WFLOAT
+	WSTR " cm et pèse "
+	LOAD -2(LB), R2
+	LOAD 2(R2), R1
+	WFLOAT
+	WSTR " kg"
+	WNL
+fin.Personne.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Homme
+init.Homme:
+	TSTO #6
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.Personne
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Homme.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	WSTR "La personne est un homme âgé de "
+	LOAD -2(LB), R2
+	LOAD 1(R2), R1
+	WINT
+	WSTR " ans. Il fait "
+	LOAD -2(LB), R2
+	LOAD 3(R2), R1
+	WFLOAT
+	WSTR " cm et pèse "
+	LOAD -2(LB), R2
+	LOAD 2(R2), R1
+	WFLOAT
+	WSTR " kg"
+	WNL
+fin.Homme.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Femme
+init.Femme:
+	TSTO #6
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.Personne
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Femme.toString:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	WSTR "La personne est une femme âgée de "
+	LOAD -2(LB), R2
+	LOAD 1(R2), R1
+	WINT
+	WSTR " ans. Elle fait "
+	LOAD -2(LB), R2
+	LOAD 3(R2), R1
+	WFLOAT
+	WSTR " cm et pèse "
+	LOAD -2(LB), R2
+	LOAD 2(R2), R1
+	WFLOAT
+	WSTR " kg"
+	WNL
+fin.Femme.toString:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+; Initialisation des champs de la classe Famille
+init.Famille:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #4, R1
+	BOV tas_plein
+	LEA 37(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.Femme
+	POP R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #4, R1
+	BOV tas_plein
+	LEA 20(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.Homme
+	POP R1
+	STORE R1, 2(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #4, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.Personne
+	POP R1
+	STORE R1, 3(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	NEW #4, R1
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R1)
+	PUSH R1
+	BSR init.Personne
+	POP R1
+	STORE R1, 4(R2)
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Famille.getNbMembers:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD #4, R0
+	BRA fin.Famille.getNbMembers
+	BRA fin.Famille.getNbMembers
+etiq_fin33:
+	WSTR "Erreur : sortie de la methode fin.Famille.getNbMemberssans return"
+	WNL
+	ERROR
+fin.Famille.getNbMembers:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Famille.getFemme:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R2
+	LOAD 1(R2), R0
+	BRA fin.Famille.getFemme
+	BRA fin.Famille.getFemme
+etiq_fin34:
+	WSTR "Erreur : sortie de la methode fin.Famille.getFemmesans return"
+	WNL
+	ERROR
+fin.Famille.getFemme:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Famille.getHomme:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R2
+	LOAD 2(R2), R0
+	BRA fin.Famille.getHomme
+	BRA fin.Famille.getHomme
+etiq_fin35:
+	WSTR "Erreur : sortie de la methode fin.Famille.getHommesans return"
+	WNL
+	ERROR
+fin.Famille.getHomme:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Famille.getEnfant1:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R2
+	LOAD 3(R2), R0
+	BRA fin.Famille.getEnfant1
+	BRA fin.Famille.getEnfant1
+etiq_fin36:
+	WSTR "Erreur : sortie de la methode fin.Famille.getEnfant1sans return"
+	WNL
+	ERROR
+fin.Famille.getEnfant1:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+code.Famille.getEnfant2:
+	TSTO #3
+	PUSH R2
+	PUSH R3
+	PUSH R4
+	LOAD -2(LB), R0
+	CMP #null, R0
+	BEQ dereferencement_null
+	LOAD 4(R0), R0
+	BRA fin.Famille.getEnfant2
+	BRA fin.Famille.getEnfant2
+etiq_fin37:
+	WSTR "Erreur : sortie de la methode fin.Famille.getEnfant2sans return"
+	WNL
+	ERROR
+fin.Famille.getEnfant2:
+	POP R4
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

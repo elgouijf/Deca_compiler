@@ -1,0 +1,191 @@
+; test de la taille de la pile
+	TSTO #14	; Taille maximale de la pile
+	ADDSP #11
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de Calc
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.Calc.pgcd, R0
+	STORE R0, 5(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 2
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.Calc
+	POP R2
+	STORE R2, 6(GB)
+	ADDSP #3
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD #45, R2
+	STORE R2, -1(SP)
+	LOAD #9, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 7(GB)
+	ADDSP #3
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD #89, R2
+	STORE R2, -1(SP)
+	LOAD #7, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 8(GB)
+	ADDSP #3
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD #657, R2
+	STORE R2, -1(SP)
+	LOAD #89, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 9(GB)
+	ADDSP #3
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD #48, R2
+	STORE R2, -1(SP)
+	LOAD #18, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 10(GB)
+	ADDSP #3
+	LOAD 6(GB), R2
+	STORE R2, 0(SP)
+	LOAD #270, R2
+	STORE R2, -1(SP)
+	LOAD #192, R2
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	LOAD R0, R1
+	STORE R1, 11(GB)
+; Beginning of main instructions:
+	WSTR "pgcd(45,9) = "
+	LOAD 7(GB), R1
+	WINT
+	WNL
+	WSTR "pgcd(89,7) = "
+	LOAD 8(GB), R1
+	WINT
+	WNL
+	WSTR "pgcd(657,98) = "
+	LOAD 9(GB), R1
+	WINT
+	WNL
+	WSTR "pgcd(48,18) = "
+	LOAD 10(GB), R1
+	WINT
+	WNL
+	WSTR "pgcd(270,192) = "
+	LOAD 11(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe Calc
+init.Calc:
+	RTS
+code.Calc.pgcd:
+	TSTO #1
+	PUSH R2
+	LOAD -4(LB), R2
+	CMP #0, R2
+	BNE E_Sinon.0
+	LOAD -3(LB), R0
+	BRA fin.Calc.pgcd
+	BRA E_Fin.0
+E_Sinon.0:
+	ADDSP #3
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -4(LB), R2
+	STORE R2, -1(SP)
+	LOAD -3(LB), R2
+	REM -4(LB), R2
+	BOV division_by_zero_error
+	STORE R2, -2(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #3
+	BRA fin.Calc.pgcd
+E_Fin.0:
+fin.Calc.pgcd:
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+division_by_zero_error:
+	WSTR "Error : Division by zero is forbidden"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

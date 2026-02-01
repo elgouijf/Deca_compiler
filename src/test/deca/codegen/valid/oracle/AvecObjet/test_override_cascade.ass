@@ -1,0 +1,287 @@
+; test de la taille de la pile
+	TSTO #23	; Taille maximale de la pile
+	ADDSP #22
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de A
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.A.ret, R0
+	STORE R0, 5(GB)
+; Construction de la table des méthodes de B
+	LEA 3(GB), R0
+	STORE R0, 6(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 7(GB)
+	LOAD code.B.ret, R0
+	STORE R0, 8(GB)
+; Construction de la table des méthodes de C
+	LEA 3(GB), R0
+	STORE R0, 9(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 10(GB)
+	LOAD code.C.ret, R0
+	STORE R0, 11(GB)
+; Construction de la table des méthodes de D
+	LEA 3(GB), R0
+	STORE R0, 12(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 13(GB)
+	LOAD code.D.ret, R0
+	STORE R0, 14(GB)
+; Construction de la table des méthodes de E
+	LEA 12(GB), R0
+	STORE R0, 15(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 16(GB)
+	LOAD code.D.ret, R0
+	STORE R0, 17(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 10
+	NEW #1, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.A
+	POP R2
+	STORE R2, 18(GB)
+; new ligne 10
+	NEW #1, R2
+	BOV tas_plein
+	LEA 6(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.B
+	POP R2
+	STORE R2, 19(GB)
+; new ligne 10
+	NEW #1, R2
+	BOV tas_plein
+	LEA 9(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.C
+	POP R2
+	STORE R2, 20(GB)
+; new ligne 10
+	NEW #1, R2
+	BOV tas_plein
+	LEA 12(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.D
+	POP R2
+	STORE R2, 21(GB)
+; new ligne 10
+	NEW #1, R2
+	BOV tas_plein
+	LEA 15(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.E
+	POP R2
+	STORE R2, 22(GB)
+; Beginning of main instructions:
+	ADDSP #1
+	LOAD 18(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #1
+	LOAD 19(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #1
+	LOAD 20(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #1
+	LOAD 21(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #1
+	LOAD 22(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 2(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe A
+init.A:
+	RTS
+code.A.ret:
+	LOAD #0, R0
+	BRA fin.A.ret
+	BRA fin.A.ret
+etiq_fin0:
+	WSTR "Erreur : sortie de la methode fin.A.retsans return"
+	WNL
+	ERROR
+fin.A.ret:
+	RTS
+; Initialisation des champs de la classe B
+init.B:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.B.ret:
+	TSTO #1
+	PUSH R2
+	LOAD #1, R0
+	BRA fin.B.ret
+	BRA fin.B.ret
+etiq_fin1:
+	WSTR "Erreur : sortie de la methode fin.B.retsans return"
+	WNL
+	ERROR
+fin.B.ret:
+	POP R2
+	RTS
+; Initialisation des champs de la classe C
+init.C:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.C.ret:
+	TSTO #1
+	PUSH R2
+	LOAD #2, R0
+	BRA fin.C.ret
+	BRA fin.C.ret
+etiq_fin2:
+	WSTR "Erreur : sortie de la methode fin.C.retsans return"
+	WNL
+	ERROR
+fin.C.ret:
+	POP R2
+	RTS
+; Initialisation des champs de la classe D
+init.D:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.A
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+code.D.ret:
+	TSTO #1
+	PUSH R2
+	LOAD #3, R0
+	BRA fin.D.ret
+	BRA fin.D.ret
+etiq_fin3:
+	WSTR "Erreur : sortie de la methode fin.D.retsans return"
+	WNL
+	ERROR
+fin.D.ret:
+	POP R2
+	RTS
+; Initialisation des champs de la classe E
+init.E:
+	TSTO #4
+	PUSH R2
+	BOV stack_overflow_error
+	LOAD -2(LB), R1
+	PUSH R1
+	BSR init.D
+	SUBSP #1
+	LOAD -2(LB), R1
+	RTS
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program

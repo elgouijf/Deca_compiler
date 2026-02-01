@@ -1,0 +1,362 @@
+; test de la taille de la pile
+	TSTO #15	; Taille maximale de la pile
+	ADDSP #13
+	BOV stack_overflow_error
+; start main program
+; Construction de la table des méthodes de Object
+	LOAD #null, R0
+	STORE R0, 1(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 2(GB)
+; Construction de la table des méthodes de CompteBancaire
+	LEA 1(GB), R0
+	STORE R0, 3(GB)
+	LOAD code.Object.equals, R0
+	STORE R0, 4(GB)
+	LOAD code.CompteBancaire.setSoldeInit, R0
+	STORE R0, 5(GB)
+	LOAD code.CompteBancaire.getSoldeCourant, R0
+	STORE R0, 6(GB)
+	LOAD code.CompteBancaire.verserDansCompte, R0
+	STORE R0, 7(GB)
+	LOAD code.CompteBancaire.soldeSuffisant, R0
+	STORE R0, 8(GB)
+	LOAD code.CompteBancaire.retirerArgent, R0
+	STORE R0, 9(GB)
+	LOAD code.CompteBancaire.faireVirement, R0
+	STORE R0, 10(GB)
+; Main program
+; Beginning of main declarations:
+; new ligne 13
+	NEW #3, R2
+	BOV tas_plein
+	LEA 3(GB), R0
+	STORE R0, 0(R2)
+	PUSH R2
+	BSR init.CompteBancaire
+	POP R2
+	STORE R2, 11(GB)
+	LOAD #0, R1
+	STORE R1, 12(GB)
+	LOAD #0, R1
+	STORE R1, 13(GB)
+; Beginning of main instructions:
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD #200, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 2(R3)
+	SUBSP #2
+	WSTR "Solde initial = "
+	ADDSP #1
+	LOAD 11(GB), R2
+	STORE R2, 0(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 3(R2)
+	SUBSP #1
+	LOAD R0, R1
+	WINT
+	WNL
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD #250, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 7(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.0
+	WSTR "Un virement a été fait d'un montant de : "
+	LOAD #250, R1
+	WINT
+	WNL
+	BRA E_Fin.0
+E_Sinon.0:
+	LOAD #250, R2
+	ADDSP #1
+	LOAD 11(GB), R4
+	STORE R4, 0(SP)
+	LOAD 0(SP), R4
+	CMP #null, R4
+	BEQ dereferencement_null
+	LOAD 0(R4), R4
+	BSR 3(R4)
+	SUBSP #1
+	LOAD R0, R3
+	SUB R3, R2
+	BOV overflow_error
+	STORE R2, 13(GB)
+	WSTR "Solde insuffisant, il vous faut : "
+	LOAD 13(GB), R1
+	WINT
+	WNL
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD 13(GB), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 4(R3)
+	SUBSP #2
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD #250, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 7(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.1
+	WSTR "Virement réussi"
+	WNL
+	BRA E_Fin.1
+E_Sinon.1:
+	WSTR "Différentiel rajouté insuffisant"
+	WNL
+E_Fin.1:
+E_Fin.0:
+	LOAD #1000, R2
+	LOAD 11(GB), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	PUSH R3
+	LOAD #1000, R2
+	POP R3
+	STORE R2, 2(R3)
+	BRA E_Cond.2
+E_Debut.2:
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD #100, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 6(R3)
+	SUBSP #2
+	LOAD R0, R2
+	LOAD 12(GB), R2
+	ADD #1, R2
+	BOV overflow_error
+	STORE R2, 12(GB)
+E_Cond.2:
+	ADDSP #2
+	LOAD 11(GB), R3
+	STORE R3, 0(SP)
+	LOAD #100, R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 5(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BNE E_Debut.2
+	WSTR "Nombre de retraits total jusqu'à épuisement : "
+	LOAD 12(GB), R1
+	WINT
+	WNL
+	HALT
+; end main program
+code.Object.equals:
+	LOAD -2(LB), R0
+	LOAD -3(LB), R1
+	CMP R0, R1
+	BEQ equal
+not_equal:
+	LOAD #0, R0
+	RTS
+equal:
+	LOAD #1, R0
+	RTS
+; Initialisation des champs de la classe CompteBancaire
+init.CompteBancaire:
+	TSTO #1
+	PUSH R2
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 1(R2)
+; Entree dans la boucle des fields
+	LOAD -2(LB), R2
+	LOAD #0, R1
+	STORE R1, 2(R2)
+	POP R2
+	RTS
+code.CompteBancaire.setSoldeInit:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -3(LB), R2
+	LOAD -2(LB), R3
+	STORE R2, 2(R3)
+fin.CompteBancaire.setSoldeInit:
+	POP R3
+	POP R2
+	RTS
+code.CompteBancaire.getSoldeCourant:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R0
+	CMP #null, R0
+	BEQ dereferencement_null
+	LOAD 2(R0), R0
+	BRA fin.CompteBancaire.getSoldeCourant
+	BRA fin.CompteBancaire.getSoldeCourant
+etiq_fin3:
+	WSTR "Erreur : sortie de la methode fin.CompteBancaire.getSoldeCourantsans return"
+	WNL
+	ERROR
+fin.CompteBancaire.getSoldeCourant:
+	POP R3
+	POP R2
+	RTS
+code.CompteBancaire.verserDansCompte:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	ADD -3(LB), R2
+	BOV overflow_error
+	LOAD -2(LB), R3
+	STORE R2, 2(R3)
+fin.CompteBancaire.verserDansCompte:
+	POP R3
+	POP R2
+	RTS
+code.CompteBancaire.soldeSuffisant:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	ADDSP #1
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 3(R3)
+	SUBSP #1
+	LOAD R0, R2
+	LOAD -3(LB), R3
+	CMP R3, R2
+	BLT E_Sinon.4
+	LOAD #1, R0
+	BRA fin.CompteBancaire.soldeSuffisant
+	BRA E_Fin.4
+E_Sinon.4:
+	LOAD #0, R0
+	BRA fin.CompteBancaire.soldeSuffisant
+E_Fin.4:
+fin.CompteBancaire.soldeSuffisant:
+	POP R3
+	POP R2
+	RTS
+code.CompteBancaire.retirerArgent:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	ADDSP #2
+	LOAD -2(LB), R3
+	STORE R3, 0(SP)
+	LOAD -3(LB), R3
+	STORE R3, -1(SP)
+	LOAD 0(SP), R3
+	CMP #null, R3
+	BEQ dereferencement_null
+	LOAD 0(R3), R3
+	BSR 5(R3)
+	SUBSP #2
+	LOAD R0, R2
+	CMP #0, R2
+	BEQ E_Sinon.5
+	LOAD -2(LB), R3
+	LOAD 2(R3), R2
+	SUB -3(LB), R2
+	BOV overflow_error
+	LOAD -2(LB), R3
+	STORE R2, 2(R3)
+	LOAD #1, R0
+	BRA fin.CompteBancaire.retirerArgent
+	BRA E_Fin.5
+E_Sinon.5:
+	LOAD #0, R0
+	BRA fin.CompteBancaire.retirerArgent
+E_Fin.5:
+fin.CompteBancaire.retirerArgent:
+	POP R3
+	POP R2
+	RTS
+code.CompteBancaire.faireVirement:
+	TSTO #2
+	PUSH R2
+	PUSH R3
+	ADDSP #2
+	LOAD -2(LB), R2
+	STORE R2, 0(SP)
+	LOAD -3(LB), R2
+	STORE R2, -1(SP)
+	LOAD 0(SP), R2
+	CMP #null, R2
+	BEQ dereferencement_null
+	LOAD 0(R2), R2
+	BSR 6(R2)
+	SUBSP #2
+	BRA fin.CompteBancaire.faireVirement
+	BRA fin.CompteBancaire.faireVirement
+etiq_fin6:
+	WSTR "Erreur : sortie de la methode fin.CompteBancaire.faireVirementsans return"
+	WNL
+	ERROR
+fin.CompteBancaire.faireVirement:
+	POP R3
+	POP R2
+	RTS
+stack_overflow_error:
+	WSTR "Error : Stack Overflow"
+	WNL
+	ERROR
+overflow_error:
+	WSTR "Error : Overflow during arithmetic operation"
+	WNL
+	ERROR
+io_error:
+	WSTR "Error : Input / Output Error "
+	WNL
+	ERROR
+tas_plein:
+	WSTR "Error : Heap OverFlow"
+	WNL
+	ERROR
+dereferencement_null:
+	WSTR "Error : Dereferencing null"
+	WNL
+	ERROR
+; end main program
