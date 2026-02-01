@@ -11,8 +11,6 @@ jobs:
   # ======================
   tests-basic:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -34,8 +32,6 @@ jobs:
   # ======================
   tests-lex:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -66,8 +62,6 @@ jobs:
   # ======================
   tests-synt:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -98,8 +92,6 @@ jobs:
   # ======================
   tests-context:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -130,8 +122,6 @@ jobs:
   # ======================
   tests-codegen:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -162,8 +152,6 @@ jobs:
   # ======================
   tests-differential:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:24.04
 
     steps:
       - uses: actions/checkout@v4
