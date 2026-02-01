@@ -1,102 +1,142 @@
-name: CI Deca GL Performance
+name: CI Deca GL
 
 on:
   push:
   pull_request:
 
+# L'image globale comme sur GitLab
+container:
+  image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
+
 jobs:
-  # ==========================================
-  # ÉTAPE 1 : Compilation unique (Gain de temps)
-  # ==========================================
-  build-project:
+  tests-basic:
     runs-on: ubuntu-latest
-    container: 
-      image: gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compile
-        run: mvn -q clean test-compile
-      # On sauvegarde le dossier target pour les jobs suivants
-      - name: Cache target
-        uses: actions/upload-artifact@v4
-        with:
-          name: compiled-project
-          path: .
-
-  # ==========================================
-  # ÉTAPE 2 : Tests en parallèle
-  # ==========================================
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Run basic tests
+        run: mvn -q -e test
 
   tests-lex:
-    needs: build-project
     runs-on: ubuntu-latest
-    container: { image: "gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest" }
     steps:
-      - uses: actions/download-artifact@v4
-        with: { name: compiled-project }
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
       - name: Lexical tests
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
-          mvn -q dependency:build-classpath
+          mvn -q -DskipTests test-compile dependency:build-classpath
           ./src/test/script/test_lex_energy.sh
-      - name: Upload report
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
-        with: { name: report-lex, path: src/test/script/report }
+        with:
+          name: report-lex
+          path: src/test/script/report
 
   tests-synt:
-    needs: build-project
     runs-on: ubuntu-latest
-    container: { image: "gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest" }
     steps:
-      - uses: actions/download-artifact@v4
-        with: { name: compiled-project }
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
       - name: Syntax tests
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
-          mvn -q dependency:build-classpath
+          mvn -q -DskipTests test-compile dependency:build-classpath
           ./src/test/script/test_syntax_energy.sh
-      - name: Upload report
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
-        with: { name: report-syntax, path: src/test/script/report }
+        with:
+          name: report-syntax
+          path: src/test/script/report
 
-  tests-codegen:
-    needs: build-project
+  tests-context:
     runs-on: ubuntu-latest
-    container: { image: "gitlab.ensimag.fr:5050/gl2026/gr8/gl43/deca-maven-ima:latest" }
     steps:
-      - uses: actions/download-artifact@v4
-        with: { name: compiled-project }
-      - name: Codegen tests
+      - uses: actions/checkout@v4
+      - name: Setup
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
-          mvn -q dependency:build-classpath
-          ./src/test/script/test_gencode_energy.sh
-      - name: Upload report
+      - name: Context tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_context_energy.sh
+      - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
-        with: { name: report-codegen, path: src/test/script/report }
+        with:
+          name: report-context
+          path: src/test/script/report
 
-  # ==========================================
-  # ÉTAPE 3 : Déploiement Pages
-  # ==========================================
-  pages:
-    needs: [tests-lex, tests-synt, tests-codegen]
+  tests-codegen:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Codegen tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_gencode_energy.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-codegen
+          path: src/test/script/report
+
+  tests-differential:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cp tools/ima /usr/local/bin/ima && chmod +x /usr/local/bin/ima
+      - name: Differential tests
+        run: |
+          mvn -q -DskipTests test-compile dependency:build-classpath
+          ./src/test/script/test_differential_energy.sh
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-differential
+          path: src/test/script/report
+
+  pages:
+    runs-on: ubuntu-latest
+    needs: [tests-lex, tests-synt, tests-context, tests-codegen, tests-differential]
     if: always()
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
-        with: { path: public }
+      - name: Download all reports
+        uses: actions/download-artifact@v4
+        with:
+          path: all-reports
       - name: Generate Index
         run: |
-          # Ton script de génération d'index.html ici
-          echo "<html><body><h1>Tests</h1>" > public/index.html
-          find public -name "*.svg" -exec bash -c 'cp {} public/ && echo "<img src=\"$(basename {})\" /><br>" >> public/index.html' \;
+          mkdir -p public
+          # Récupère tous les SVGs des dossiers d'artefacts
+          find all-reports -name "*.svg" -exec cp {} public/ \; || true
+          
+          echo "<html><body><h1>Résultats des tests</h1>" > public/index.html
+          for img in public/*.svg; do
+            img_name=$(basename "$img")
+            echo "<img src=\"$img_name\" alt=\"$img_name\" /><br>" >> public/index.html
+          done
+          echo "</body></html>" >> public/index.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
